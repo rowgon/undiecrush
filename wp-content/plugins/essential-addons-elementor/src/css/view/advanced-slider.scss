@@ -1,0 +1,1019 @@
+.eael-advanced-slider {
+    /* Transition easing — applies to BOTH the wrapper AND individual
+       slides. Verified live in Chrome that for fade/cards/flip/coverflow
+       Swiper transitions per-SLIDE (slide0.transitionProperty was "opacity"
+       and timing was "ease, ease, ease, ease, ease" — five eases, not our
+       cubic-bezier). v18 and v19 only set timing-function on .swiper-wrapper,
+       which is what Swiper uses for the SLIDE effect translate animation but
+       NOT for fade/cards/flip/coverflow. Net result: easing presets felt
+       identical for everything except slide effect. v20 covers all five
+       effects by applying the variable to both. */
+    /* Transition easing is now applied via JS in view + edit advanced-slider.js:
+       JS reads the data-easing attribute, looks up the cubic-bezier curve in
+       ADVANCED_SLIDER_EASING_CURVES, and writes transition-timing-function
+       inline-WITH-important on the wrapper and every slide on each Swiper
+       setTransition event. Inline-with-important is what reliably beats both
+       Swiper's inline `style.transition` shorthand and Elementor's per-page
+       CSS rules.
+
+       The old CSS-variable approach (--eael-as-easing on the wrapper +
+       `transition-timing-function: var(--eael-as-easing) !important` on
+       descendants) was unreliable — different browsers / Swiper versions
+       handled the inline-vs-CSS cascade differently, and users reported all
+       four presets felt the same. */
+
+    /* Force flex-direction:column on every slider so any pagination
+       host appended to $scope (progress_bar, thumbnails, numbered_index,
+       swiper bullets) stacks BELOW the .swiper-wrapper
+       instead of being squeezed into a tall narrow strip beside it.
+       Background: on the frontend, $scope IS the .swiper element (the
+       view JS adds .swiper to $scope when $inner falls back to it on
+       e-con-full containers). Elementor decorates that same element with
+       `e-flex e-con-row` → `display: flex; flex-direction: row` →
+       children laid out side-by-side. Editor doesn't have this issue
+       because the .swiper is a CHILD of .eael-advanced-slider with our own
+       layout. The user reported "Progress Bar doesn't show on Fade
+       frontend" — actual cause: the host was rendering at 125×537 next
+       to the swiper-wrapper, hidden by overflow:hidden of the .swiper
+       container. Forcing column layout makes the host flow below the
+       wrapper, which is what the demo HTML's V3 ("Travel magazine ·
+       Fade hero with timing") does.
+
+       !important required: Elementor's `.e-flex.e-con-row` selector
+       (specificity 0,2,0) sets `flex-direction: row` and beats our
+       single-class rule (specificity 0,1,0) without !important. v20
+       initial commit forgot the !important — verified live that
+       sliderFlexDirection was still "row" on marquee/progress_bar
+       sliders post-install. */
+    display: flex !important;
+    flex-direction: column !important;
+
+    position: relative;
+
+    /* CRITICAL: when this element is a child of a flex container (Elementor's
+       `.e-con-inner` in editor mode is `display: flex; flex-direction: row`),
+       `min-width: auto` allows the slider to grow to fit its content, AND
+       a default `flex: 0 1 auto` lets the slider shrink to its content width
+       (e.g. 640px for cards) instead of filling the parent. Both behaviors
+       break centering and recursive layout. Pin to 100% width and grow/shrink
+       to that, so the slider is always the full width of the Elementor
+       container regardless of parent flex-direction.
+       overflow: visible is critical so progress bar / numbered index / thumbnails
+       siblings rendered BELOW the .swiper aren't clipped. The width-recursion
+       loop is broken by max-width: 100% alone — overflow:hidden on the outer
+       was a belt-and-suspenders we no longer need. */
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    flex: 1 1 100%;
+    overflow: visible;
+    box-sizing: border-box;
+
+    /* The Swiper child still needs overflow:hidden so it clips its translated
+       slide-wrapper internally. (3D effects override this back to visible.) */
+    > .swiper {
+        /* Editor/frontend parity fix.
+           In the editor, the view JS builds a brand-new `<div class="swiper">`
+           (a clean block element) and inits Swiper on it. On the frontend the
+           view JS instead REUSES Elementor's existing `.e-con-inner` /
+           `.elementor-container` as the `.swiper` — and that element keeps
+           Elementor's `display:flex; flex-wrap:wrap; gap` decoration. Swiper
+           expects its container to be a plain block: running it on a flex-wrap
+           container leaves the translated `.swiper-wrapper` track/height
+           mis-resolved, so slides pile up at the same offset (reads as an
+           accidental fade/overlap) and advance jerkily.
+           Forcing the container back to `display:block` makes the frontend
+           container behave exactly like the editor's clean one. Scoped to the
+           DIRECT `> .swiper` child only, so the per-slide nested `.e-con-inner`
+           (which must stay flex for the user's own layout) is untouched.
+           `!important` is required to beat Elementor's `.e-con > .e-con-inner`
+           / `.elementor-container` flex rules (equal specificity). */
+        display: block !important;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .e-con-inner {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .swiper-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .swiper-slide {
+        flex-shrink: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ────────────────────────────────────────────────────────────────
+       CSS-driven slide sizing (replaces forceSwiperSlideWidths runtime
+       DOM-writes from earlier builds).
+
+       Why:
+         Elementor injects per-widget `width: var(--container-widget-width, 30%);
+         max-width: 30%` on every column-sized widget. Swiper computes a
+         slide width and writes it to `style.width` (no !important).
+         Elementor's `max-width: 30%` clamps Swiper's rendered width →
+         Items Per Slide has no visible effect.
+
+       Old fix (forceSwiperSlideWidths):
+         On every resize / slidesUpdated / breakpoint event, loop every
+         slide and write 4-5 inline styles with !important. ~90 DOM ops
+         per event on an 18-slide looped slider; multiple sliders + a
+         window drag = layout thrashing.
+
+       New fix (this rule):
+         JS writes ONE CSS custom property on the .eael-advanced-slider
+         wrapper per Swiper resize/breakpoint event (--eael-as-slide-w
+         for horizontal, --eael-as-slide-h for vertical). This rule
+         applies the variable to every slide via !important + high
+         specificity (4 classes + 2 :not() = 0,6,3 — beats Elementor's
+         `.e-flex.e-con-row` at 0,2,0).
+
+       Cards and Flip effects bypass this entirely — their slides are
+       sized by the dedicated `.eael-advanced-slider-cards .swiper {...}`
+       max-width rules below. The :not() chain excludes them.
+       ──────────────────────────────────────────────────────────────── */
+    &:not(.eael-advanced-slider-cards):not(.eael-advanced-slider-flip):not(.eael-advanced-slider-vertical) {
+        > .swiper > .swiper-wrapper > .swiper-slide,
+        &.swiper > .swiper-wrapper > .swiper-slide {
+            width: var(--eael-as-slide-w, 100%) !important;
+            max-width: none !important;
+            flex-basis: var(--eael-as-slide-w, 100%) !important;
+            flex-shrink: 0 !important;
+        }
+    }
+    &.eael-advanced-slider-vertical:not(.eael-advanced-slider-cards):not(.eael-advanced-slider-flip) {
+        > .swiper > .swiper-wrapper > .swiper-slide,
+        &.swiper > .swiper-wrapper > .swiper-slide {
+            width: 100% !important;
+            max-width: none !important;
+            height: var(--eael-as-slide-h, auto) !important;
+            max-height: none !important;
+            flex-basis: var(--eael-as-slide-h, auto) !important;
+            flex-shrink: 0 !important;
+            /* Clip slide content to the computed per-view slide height.
+               In a vertical N-per-view slider each .swiper-slide is sized to
+               (container-height − gaps) / items (e.g. 244px for 2-per-view on a
+               70vh slider). But the slide's content keeps its natural size — an
+               Elementor Image widget renders the <img> at its intrinsic height
+               (e.g. 533px), which with the default `overflow: visible` bleeds
+               out of the 244px slide box and visually overlaps the adjacent
+               slide. The editor preview doesn't show this because its rebuilt
+               structure clips; the frontend reuses Elementor's DOM and never
+               did. overflow:hidden makes each slide a clean fixed-height window. */
+            overflow: hidden !important;
+        }
+        /* Make image slides fill their fixed-height window instead of being
+           top-cropped at native width. object-fit:cover keeps aspect ratio and
+           covers the slide — the intended look for an image-per-slide vertical
+           slider. Scoped to vertical slides so it never touches horizontal/3D. */
+        > .swiper > .swiper-wrapper > .swiper-slide img,
+        &.swiper > .swiper-wrapper > .swiper-slide img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        z-index: 2;
+    }
+    &.eael-advanced-slider-coverflow{
+        .swiper-slide-shadow-top,
+        .swiper-slide-shadow-bottom{
+            z-index: -1;
+        }
+    }
+    &.eael-advanced-slider-cards{
+        .swiper-slide-shadow{
+            z-index: -1;
+        }
+    }
+
+    /* ============================================================
+       Cards / Flip / Coverflow — visual treatment matching the
+       reference demo (V5 stacked-cards testimonial).
+
+       Key requirements:
+       1. The outer slider lets 3D-rotated cards bleed beyond its
+          edges (override the dimension-fix overflow:hidden).
+       2. Slides have a solid background by default so stacked cards
+          don't show through each other.
+       3. Slides have padding + rounded corners + shadow for the
+          "card" look out of the box.
+       4. Cards have a moderate max-width (640px) and breathing room
+          on top/bottom so the 3D rotation has space to render.
+       ============================================================ */
+    &.eael-advanced-slider-cards,
+    &.eael-advanced-slider-flip,
+    &.eael-advanced-slider-coverflow {
+        overflow: visible;                  /* let 3D rotation bleed past the wrapper */
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+        /* Use flex centering to guarantee horizontal centering regardless of the
+           parent container's flex-direction. Without this, when Elementor's
+           parent .e-con-inner is `flex-direction: row`, the .swiper child sticks
+           to the left edge instead of centering even with margin: 0 auto. */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* same-element-OR-descendant — frontend has .swiper on the same
+           element as .eael-advanced-slider-cards, editor has it as a child.
+           &.swiper covers the frontend case. */
+        > .swiper,
+        .swiper,
+        &.swiper {
+            width: 100%;                    /* take available width up to max-width */
+            margin-left: auto;
+            margin-right: auto;
+            overflow: visible;              /* allow rotated edges to show */
+        }
+        .swiper-wrapper {
+            overflow: visible;
+        }
+        /* slide tuned to match demo V5's card chrome — radius 14px (was
+           16, 14 reads more refined), shadow softened to demo's single
+           layer `0 30px 60px -20px rgba(15,15,50,0.18)`. min-height: 360px
+           is the demo's V5 fixed height — sliders with sparse content stay
+           card-sized; with rich content (Call-to-Action with image + text)
+           the auto-fit pass in eaelAutoFitHeight measures slide.scrollHeight
+           and grows the .swiper container to fit so nothing clips.
+
+           :not(.eael-as-thumb) — the Thumbnails pagination rail mounts its
+           tiles as .swiper-slide.eael-as-thumb INSIDE this 3D wrapper, so a
+           bare `.swiper-slide` here forced min-height:360px (and the card
+           chrome) onto every thumbnail, overriding the Thumbnail Size control's
+           height (min-height beats height) and ballooning the strip. */
+        .swiper-slide:not(.eael-as-thumb) {
+            overflow: hidden;
+            height: 100%;
+            max-height: 100%;
+            min-height: 360px;
+            border-radius: 14px;
+            background: #fff;
+            /* Box shadow is owned by the "Box Shadow" group control in
+               Advanced_Slider.php (register_background_controls). Its default
+               reproduces the original `0 30px 60px -20px rgba(15,15,50,0.18)`,
+               so existing sliders look identical while staying tunable. */
+            box-sizing: border-box;
+
+            /* GPU layer promotion for the 3D transform animation. Chrome
+               auto-promotes the transformed slide to its own compositor
+               layer, so the card's image/content is rasterized once and the
+               transform animates on the GPU. Firefox does NOT auto-promote
+               here — without these hints it repaints the full card (image +
+               content) on every animation frame, which is the "slides not
+               smooth in Firefox" report. translateZ(0) + backface-visibility
+               force the layer; will-change tells the engine to keep it. */
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* Active-slide overlay hook. Swiper's slide shadows only paint the
+           non-active side/back slides, so the front (active) slide could not
+           be tinted. The slide's `transform: translateZ(0)` (above) makes it a
+           stacking context, so this z-index:-1 pseudo paints ABOVE the card's
+           own #fff background but BELOW the in-flow content — the tint shows on
+           the card while the text/content stays fully visible on top.
+           pointer-events:none so clicks pass through; default transparent —
+           the "Active Slide Overlay" color control in Advanced_Slider.php
+           paints it. inset:0 fills the card (containing block = the slide). */
+        .swiper-slide-active:not(.eael-as-thumb)::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            border-radius: inherit;
+            background: transparent;
+        }
+
+        /* Image-only cards: make the slide image cover the whole card so
+           shorter images don't leave a blank area below them. Auto-fit sets
+           every card to the tallest slide's height (uniform deck); without
+           this, a slide whose image is shorter than that height shows empty
+           white space. Scoped to image widgets so rich multi-widget cards
+           (text + button + image) are left untouched. */
+        .swiper-slide.elementor-widget-image,
+        .swiper-slide .elementor-widget-image {
+            height: 100%;
+        }
+        .swiper-slide.elementor-widget-image img,
+        .swiper-slide .elementor-widget-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Inner Elementor container inside each slide gets a sensible
+           default padding so user widgets aren't flush against the rounded edges */
+        .swiper-slide > .e-con-inner {
+            padding: clamp(20px, 4vw, 40px);
+        }
+        /* Pagination underneath the centered swiper should also center */
+        .eael-as-pagination,
+        .eael-as-thumbnails {
+            align-self: center;
+            justify-content: center;
+        }
+    }
+    /* dimensions tuned to match demo HTML's V5 (Customer love · Stacked
+       cards testimonial) and V7 (Fashion lookbook · 3D flip). Cards now use
+       min(520px, 92%) width like the demo — narrower than v19's 640px so the
+       perSlideOffset:9 / perSlideRotate:2.4 stacking actually reads visually.
+       Flip stays at 720px; coverflow stays full-width for hero banners. */
+    /* Auto-fit height: drop the 360px card-presence floor so the slider hugs
+       its content instead of forcing every 3D slide to ≥360px (the "slider too
+       tall / empty space below content" report). The floor still applies when
+       Auto-fit Slide Height is OFF — there the Manual Slider Height control
+       owns the dimension. Higher specificity (5 classes) + later source order
+       than the `.swiper-slide:not(.eael-as-thumb)` floor above, so it wins. */
+    &.eael-as-auto-height {
+        &.eael-advanced-slider-cards,
+        &.eael-advanced-slider-flip,
+        &.eael-advanced-slider-coverflow {
+            .swiper-slide:not(.eael-as-thumb) {
+                min-height: 0;
+            }
+        }
+    }
+
+    &.eael-advanced-slider-cards .swiper,
+    &.eael-advanced-slider-cards.swiper {
+        max-width: min(520px, 92%);
+    }
+    &.eael-advanced-slider-flip .swiper,
+    &.eael-advanced-slider-flip.swiper {
+        max-width: 720px;
+    }
+    &.eael-advanced-slider-coverflow .swiper,
+    &.eael-advanced-slider-coverflow.swiper {
+        max-width: 100%;
+    }
+
+    /* Coverflow horizontal-overflow clip.
+       Coverflow lays its full slide track side-by-side (slidesPerView ≥ 1, not
+       centered) and the generic 3D block above sets the .swiper to
+       `overflow: visible` so rotated edges/shadows bleed. For cards/flip that
+       track is one slide wide so nothing spills; for coverflow the off-screen
+       slides (everything past the visible 3) extend the track well past the
+       viewport — measured scrollWidth ≈ 3× the container — and on the frontend
+       (where the slider IS the full-width container) that paints a document-
+       level HORIZONTAL SCROLLBAR.
+
+       Fix: clip the horizontal axis only. `overflow-x: clip` (not `hidden`)
+       leaves `overflow-y: visible` intact — unlike `hidden`, `clip` does not
+       force the cross-axis to compute as `auto` — so the 40px top/bottom
+       padding and the 3D depth shadows still show while the horizontal spill
+       that caused the scrollbar is cut at the slider edge. The visible side
+       slides recede toward center and stay inside the container width, so
+       clipping at the edge is exactly the intended coverflow framing. */
+    &.eael-advanced-slider-coverflow {
+        overflow-x: clip;
+        overflow-y: visible;
+        > .swiper,
+        .swiper,
+        &.swiper {
+            overflow-x: clip;
+            overflow-y: visible;
+        }
+    }
+
+    /* Vertical mode hardening.
+       1. `overflow: hidden` on the slider AND its .swiper container is what
+          stops Swiper's vertical-translated wrapper (which is taller than the
+          container by N×slide-height) from spilling out and inflating the
+          page's scrollHeight — that was the "infinite scroll after the
+          slider" the user reported. The `&.swiper` covers the frontend's
+          flat DOM; descendant `.swiper` covers the editor's nested DOM.
+       2. `flex-direction: column` keeps any pagination/thumbnails siblings
+          stacked under the swiper instead of being placed by the parent
+          container's flex-row default.
+       3. Force Swiper's vertical pagination back to the bottom so the
+          built-in tick-bars / dots / fraction don't render as a vertical
+          rail at the top-right of the slider when direction='vertical'.
+          Swiper's pagination module auto-applies `swiper-pagination-vertical`
+          which absolutely positions the bullets to the right edge — that's
+          the "Dots Classic Horizontal Bullet shown at the Top Right Side"
+          report. We override with !important and switch to a horizontal
+          row layout. */
+    &.eael-advanced-slider-vertical {
+        overflow: hidden;
+        /* Baseline fixed height — feedback-loop guard.
+
+           In vertical mode the user's Slider Height control writes
+           `height: <value> !important` to the per-page CSS via PHP
+           `selectors`. But for sliders saved before Elementor regenerated
+           the per-page CSS file (fresh sliders, after a plugin upgrade,
+           cached uploads dir, etc.) that rule is missing → .swiper
+           collapses to `height: auto` → measures content height (sum of
+           slides) → Swiper computes slidesSizesGrid from the inflated
+           container → JS writes the value back via `--eael-as-slide-h`
+           → slides become huge → wrapper grows further → exponential
+           runaway. Real-world result was `--eael-as-slide-h: 8947663px`
+           reported by QA.
+
+           Baseline `70vh` (no `!important`) gives the container a
+           guaranteed height so the loop never starts. The user's
+           Height control still wins because PHP writes `!important`
+           via per-page CSS. */
+        height: 70vh;
+        > .swiper,
+        &.swiper {
+            overflow: hidden;
+            height: 70vh;
+        }
+        display: flex;
+        flex-direction: column;
+
+        .swiper-pagination.swiper-pagination-vertical{
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            left: 0 !important;
+            transform: none !important;
+            width: 100% !important;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 14px auto 0;
+        }
+        .eael-as-pagination--type-dots-vertical{
+            /* the user-chosen "vertical dots" pagination should still pin
+               to the right rail — that's its whole point, distinct from the
+               accidental Swiper-default vertical layout we just fixed above. */
+            position: absolute !important;
+        }
+
+        position: relative;
+        scrollbar-width: none;
+        &::-webkit-scrollbar { display: none; }
+        .eael-advanced-slider-inner {
+            &::-webkit-scrollbar { display: none; }
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE & old Edge */
+            height: 70vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .swiper-wrapper{
+            align-items: center;
+        }
+        &:not(.eael-advanced-slider-coverflow){
+            .swiper-wrapper{
+                .swiper-slide{
+                    width: var(--width);
+                }
+            }
+        }
+
+        .eael-advanced-slider-slide {
+            scroll-snap-align: center;
+            /* Each scroll-snap point must fill the snap container, otherwise
+               slides whose primary content is absolutely-positioned (Elementor
+               Video widget wraps its iframe in a `padding-bottom: 56.25%;
+               position: relative; height: 0;` aspect-ratio shell with the
+               iframe `position: absolute`) collapse to 0 height. The iframe
+               then bleeds past the slide's logical end and renders on top of
+               the next slide's slot. min-height: 100% pins each slide to the
+               container's height (set via the user's Slider Height control or
+               the 70vh baseline) so absolute-positioned children stay scoped. */
+            flex-shrink: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .eael-as-indicator {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .eael-as-indicator-index {
+            position: relative;
+            font: 0.65rem helvetica, sans-serif;
+            color: white;
+            margin: 0.5rem 0;
+            transition: transform 0.5s ease-in-out, margin 0.5s ease-in-out;
+
+            &:first-of-type::before, &:last-of-type::after { content: none; }
+
+            &::before, &::after {
+                content: '';
+                position: absolute;
+                left: calc(50% - 0.03rem);
+                transform: translateX(-50%);
+                width: 0.015rem;
+                height: 1.25rem;
+                background-color: white;
+                transform: scaleY(0);
+                transition: transform 0.5s ease-in-out;
+            }
+
+            &::before { top: -1.3rem; transform-origin: bottom; }
+            &::after  { bottom: -1.3rem; transform-origin: top; }
+        }
+
+        .expand {
+            transform: scale(3);
+            margin: 5rem 0;
+
+            &:first-of-type     { margin-top: 0; }
+            &:last-of-type      { margin-bottom: 0; }
+            &::before, &::after { transform: scaleY(1) translateX(-50%); }
+        }
+    }
+
+    &.eael-advanced-slider-marquee{
+        --duration: 60s;
+        overflow: hidden;
+        position: relative;
+
+        .eael-as-track{
+            display: flex;
+            gap: 24px;
+            width: max-content;               
+            animation: scroll var(--duration) linear infinite;
+            will-change: transform;
+            flex-direction: row;
+            max-width: max-content;
+        }
+        @keyframes scroll{
+            from{ transform: translateX(0); }
+            to  { transform: translateX(-50%); }  
+        }
+    }
+
+    .eael-as-nav-icon{
+        &.swiper-button-next,
+        &.swiper-button-prev{
+            &::after{
+                display: none;
+            }
+        }
+    }
+
+    /* ============================================================
+       Pagination — six types × five positions
+       Tokens (override via Elementor color/size controls):
+         --eael-as-pag-color       : inactive bullet/bar color
+         --eael-as-pag-active-color: active bullet/bar/progress color
+         --eael-as-pag-text-color  : fraction text color
+       ============================================================ */
+    .eael-as-pagination{
+        --eael-as-pag-color:        rgba(0,0,0,0.25);
+        --eael-as-pag-active-color: #111;
+        --eael-as-pag-text-color:   #111;
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        z-index: 5;
+        pointer-events: auto;
+    }
+
+    /* Bullets are <button> elements (Swiper bulletElement: 'button').
+       Reset native button styling so the dots/bars look clean. */
+    .eael-as-bullet,
+    .eael-as-tick-bar{
+        appearance: none;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    /* ─── Type: Dots (horizontal bullets) ─── */
+    .eael-as-pagination--type-dots{
+        .eael-as-bullet{
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 99px;
+            background: var(--eael-as-pag-color);
+            cursor: pointer;
+            transition: width .25s cubic-bezier(.22,1,.36,1), background-color .25s;
+            opacity: 1;
+        }
+        .eael-as-bullet-active{
+            width: 28px;
+            background: var(--eael-as-pag-active-color);
+        }
+    }
+
+    /* ─── Type: Vertical Dots (right rail) ─── */
+    .eael-as-pagination--type-dots-vertical{
+        flex-direction: column;
+        gap: 10px;
+        .eael-as-bullet{
+            display: block;
+            width: 6px; height: 6px;
+            border-radius: 99px;
+            background: var(--eael-as-pag-color);
+            cursor: pointer;
+            transition: height .25s cubic-bezier(.22,1,.36,1), background-color .25s;
+        }
+        .eael-as-bullet-active{
+            height: 22px;
+            background: var(--eael-as-pag-active-color);
+        }
+    }
+
+    /* ─── Type: Fraction (01 / 05) ─── */
+    .eael-as-pagination--type-fraction{
+        font-family: inherit;
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--eael-as-pag-text-color);
+        gap: 4px;
+
+        .eael-as-fraction-current{ color: var(--eael-as-pag-active-color); }
+        .eael-as-fraction-total{ opacity: 0.5; }
+        .eael-as-fraction-sep{ opacity: 0.4; padding: 0 2px; }
+
+        /* Pad current/total to 2 digits via CSS counter */
+        .swiper-pagination-current::before,
+        .eael-as-fraction-current::before { content: "0"; opacity: 0.6; }
+        .swiper-pagination-total::before,
+        .eael-as-fraction-total::before   { content: "0"; opacity: 0.6; }
+    }
+
+    /* ─── Type: Tick Bars (vertical bar fraction) ─── */
+    .eael-as-pagination--type-tick-bars{
+        gap: 4px;
+        .eael-as-tick-bar{
+            display: inline-block;
+            width: 2px; height: 14px;
+            background: var(--eael-as-pag-color);
+            border-radius: 1px;
+            transition: background-color .25s, height .25s, width .25s;
+        }
+        .eael-as-tick-bar.is-active{
+            background: var(--eael-as-pag-active-color);
+            height: 18px; width: 3px;
+        }
+    }
+
+    /* ─── Type: Progress Bar (matches demo V3 — Travel "Fade hero with timing")
+       Composite: play/pause toggle | linear progress bar | "01 / 04" counter
+       The bar fills based on autoplay-time-elapsed and resets each slide. ─── */
+    /* Progress bar — wider out of the box (matches demo V3 "Travel magazine"
+       layout where the bar reads as the full width of the lower control rail).
+       Default max-width raised from 480px to 80% via the PHP control's new
+       default; this CSS no longer caps it at 480px so the user's chosen %
+       value drives the rendered width. The control container is now 100% wide
+       with `gap: clamp(...)` so the play/pause + bar + counter stay aligned
+       across viewport sizes. */
+    .eael-as-pagination--type-progress-bar{
+        display: flex;
+        align-items: center;
+        gap: clamp(14px, 2vw, 24px);
+        width: 80%;
+        max-width: 80%;
+        padding: 0;
+        background: transparent;     /* override the dimension-fix bg */
+        /* keep the row tall enough for the toggle button no matter
+           what stale per-element CSS rules a previous plugin version wrote.
+           The pre-v20.1 'Track Height' control mistakenly targeted this
+           container; if a saved page still carries `height: 2px` from that
+           era, min-height: 38px (= toggle size) lets the button render.
+           !important to win over Elementor's per-element CSS file. */
+        min-height: 38px !important;
+        height: auto;
+        border-radius: 0;
+        margin-left: auto;
+        margin-right: auto;
+
+        .eael-as-pb-toggle{
+            flex: none;
+            appearance: none;
+            border: 0;
+            cursor: pointer;
+            width: 38px; height: 38px;
+            padding: 0;
+            border-radius: 50%;
+            background: var(--eael-as-pag-active-color);
+            color: #fff;
+            /* pause button alignment fix — `display: flex` with
+               align-items/justify-content centers the SVG more reliably than
+               `display: grid; place-items: center`, which combined with the
+               default `inline` SVG display (and the inline-style `display:none`
+               toggle on the play icon) produced a sub-pixel offset depending
+               on whether the browser snapped the inline box to baseline.
+               Forcing line-height: 0 and `display: block` on the SVG removes
+               the inline whitespace gap entirely. */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
+            transition: transform .2s cubic-bezier(.22,1,.36,1);
+        }
+        .eael-as-pb-toggle svg{
+            display: block;
+            width: 13px;
+            height: 13px;
+        }
+        .eael-as-pb-toggle:hover{ transform: scale(1.06); }
+        .eael-as-pb-track{
+            flex: 1;
+            position: relative;
+            height: 2px;
+            background: var(--eael-as-pag-color);
+            overflow: hidden;
+            border-radius: 99px;
+        }
+        .eael-as-pb-fill{
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 0;
+            background: var(--eael-as-pag-active-color);
+            /* No width transition: the JS rAF tick already writes a fresh
+               width every frame, so a CSS ease just makes the rendered fill
+               trail the true progress by ~100ms — at the slide-change moment
+               the bar reads <100% and then snaps to 0 before the ease lands,
+               so it never looks full. Let width track the rAF value 1:1. */
+            transition: none;
+        }
+        .eael-as-pb-counter{
+            flex: none;
+            font-family: inherit;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eael-as-pag-color);
+            letter-spacing: 0.04em;
+        }
+        .eael-as-pb-counter strong{
+            color: var(--eael-as-pag-active-color);
+            font-weight: 600;
+        }
+        .eael-as-pb-sep{ margin: 0 4px; opacity: 0.6; }
+    }
+    /* On dark slider backgrounds, force light tones */
+    &.eael-advanced-slider-cards .eael-as-pagination--type-progress-bar,
+    &.eael-advanced-slider-flip .eael-as-pagination--type-progress-bar {
+        --eael-as-pag-color: rgba(0,0,0,0.15);
+    }
+
+    /* ─── Position modifiers ─── */
+    /* For the Swiper-module pagination types (dots / tick_bars / fraction)
+       Swiper's own stylesheet stamps the host with `.swiper-pagination-horizontal`
+       → `position:absolute; left:0; width:100%; bottom:8px`. Those win over our
+       top/right/transform alone, so the host stays a full-width bottom row and
+       every position looked identical. We override left/right/top/bottom/width
+       with !important so OUR position class is the single source of truth. */
+    .eael-as-pagination--position-bottom{
+        position: static !important;
+        left: auto !important; right: auto !important;
+        top: auto !important; bottom: auto !important;
+        width: auto !important;
+        margin: 18px auto 0 !important;
+    }
+    .eael-as-pagination--position-inside-top-center{
+        position: absolute !important;
+        top: 18px !important; bottom: auto !important;
+        left: 50% !important; right: auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        transform: translateX(-50%);
+    }
+    .eael-as-pagination--position-inside-bottom-center{
+        position: absolute !important;
+        bottom: 18px !important; top: auto !important;
+        left: 50% !important; right: auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        transform: translateX(-50%);
+    }
+    .eael-as-pagination--position-inline-with-arrows{
+        position: static !important;
+        left: auto !important; right: auto !important;
+        top: auto !important; bottom: auto !important;
+        width: auto !important;
+        margin: 18px auto 0 !important;
+        max-width: max-content;
+    }
+    .eael-as-pagination--position-right-center{
+        position: absolute !important;
+        top: 50% !important; bottom: auto !important;
+        right: 16px !important; left: auto !important;
+        width: auto !important;
+        margin: 0 !important;
+        transform: translateY(-50%);
+        flex-direction: column;
+    }
+
+    /* Progress bar is a horizontal rail, NOT a shrink-to-fit pill like the
+       swiper pagination types. The position modifiers above set
+       `width: auto !important` (correct for dots/tick/fraction), but on the
+       progress-bar host that collapses the flex container to its content
+       width, so the `flex:1` track gets 0 width and the bar disappears while
+       the toggle + counter (intrinsic width) still show. Re-assert a real
+       width for the horizontal positions so the track can grow.
+       Uses a 2-class selector + !important so it beats the position
+       modifier's single-class !important; the PHP "Max Width" control (also
+       !important, loaded later in Elementor's per-element CSS) can still
+       override it. */
+    .eael-as-pagination--type-progress-bar.eael-as-pagination--position-bottom,
+    .eael-as-pagination--type-progress-bar.eael-as-pagination--position-inside-top-center,
+    .eael-as-pagination--type-progress-bar.eael-as-pagination--position-inside-bottom-center,
+    .eael-as-pagination--type-progress-bar.eael-as-pagination--position-inline-with-arrows{
+        width: 80% !important;
+        max-width: 80%;
+    }
+
+    /* When pagination is "inline with arrows", the JS reparents prev-arrow +
+       pagination host + next-arrow into a single `.eael-as-inline-row` so they
+       sit on one centered row. The arrows must shed Swiper's absolute edge
+       positioning and flow inline inside the row. */
+    .eael-as-inline-row{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 18px auto 0;
+
+        & > .swiper-button-next,
+        & > .swiper-button-prev{
+            position: relative;
+            top: auto; right: auto; left: auto; bottom: auto;
+            margin: 0;
+            display: inline-flex;
+            vertical-align: middle;
+        }
+        .eael-as-pagination--position-inline-with-arrows{
+            position: static !important;
+            margin: 0 !important;
+            display: inline-flex;
+            vertical-align: middle;
+        }
+
+        /* Progress bar is a wide rail, not a shrink-to-fit pill. Inside the
+           inline row the row otherwise shrink-wraps to its content, so the
+           bar's `width: 80%` resolves to 80% of nothing and the flex:1 track
+           collapses to ~10px (toggle + counter eat the row). Give the row a
+           definite width for this variant so the bar — and its track — have
+           real space to grow. The JS tags the row `--progress-bar`. */
+        &.eael-as-inline-row--progress-bar{
+            width: 80%;
+            max-width: 720px;
+
+            .eael-as-pagination--type-progress-bar{
+                flex: 1 1 auto;
+            }
+        }
+    }
+
+    /* ─── Type: Numbered Index Rail (number / alphabet / roman) ─── */
+    .eael-as-pagination--type-numbered-index{
+        gap: 8px;
+        flex-wrap: wrap;
+
+        .eael-as-index-item{
+            appearance: none;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            padding: 6px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eael-as-pag-color);
+            transition: color .25s cubic-bezier(.22,1,.36,1);
+        }
+        .eael-as-index-bar{
+            display: inline-block;
+            width: 18px; height: 1px;
+            background: currentColor;
+            transition: width .35s cubic-bezier(.22,1,.36,1);
+        }
+        .eael-as-index-item.is-active{
+            color: var(--eael-as-pag-active-color);
+        }
+        .eael-as-index-item.is-active .eael-as-index-bar{
+            width: 42px;
+            background: var(--eael-as-pag-active-color);
+        }
+        .eael-as-index-item:hover{
+            color: var(--eael-as-pag-active-color);
+        }
+    }
+    /* Vertical orientation when used on the right rail */
+    .eael-as-pagination--type-numbered-index.eael-as-pagination--position-right-center{
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+    }
+
+    /* ─── Type: Thumbnails strip ─── */
+    .eael-as-thumbnails{
+        margin: 16px auto 0;
+        max-width: 720px;
+        padding: 0 12px;
+        position: relative;
+        z-index: 5;
+    }
+    /* Position modifiers — mirror the .eael-as-pagination--position-* set so
+       the Navigation Position control applies to the thumbnails strip too.
+       `bottom` / `inline-with-arrows` keep the default in-flow margin. The
+       overlay variants anchor to the position:relative .eael-advanced-slider. */
+    .eael-as-thumbnails--position-inside-top-center{
+        position: absolute;
+        top: 18px; left: 50%;
+        margin: 0;
+        transform: translateX(-50%);
+    }
+    .eael-as-thumbnails--position-inside-bottom-center{
+        position: absolute;
+        bottom: 18px; left: 50%;
+        margin: 0;
+        transform: translateX(-50%);
+    }
+    .eael-as-thumbnails--position-right-center{
+        position: absolute;
+        top: 50%; right: 16px;
+        margin: 0;
+        max-width: 120px;
+        transform: translateY(-50%);
+    }
+    .eael-as-thumbnails-swiper{
+        width: 100%;
+    }
+    .eael-as-thumbnails .swiper-slide{
+        width: 86px !important;       /* override base .swiper-slide{width:100%} from this file */
+        height: 86px;
+        flex-shrink: 0;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        transition: transform .2s ease, box-shadow .2s ease;
+
+        &::after{
+            content: "";
+            position: absolute; inset: 0;
+            background: rgba(255,255,255,0.55);
+            transition: background-color .25s, opacity .25s;
+            pointer-events: none;
+        }
+        &.swiper-slide-thumb-active{
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px -8px rgba(0,0,0,0.35);
+            &::after{ background: transparent; }
+        }
+    }
+    .eael-as-thumbnails .swiper-slide img{
+        width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .eael-as-thumb-num{
+        display: flex; align-items: center; justify-content: center;
+        width: 100%; height: 100%;
+        background: var(--eael-as-pag-color, rgba(0,0,0,0.08));
+        color: var(--eael-as-pag-active-color, #111);
+        font-weight: 700;
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── Centered slides emphasis (Carousel pattern from screenshot 5) ─── */
+    .swiper-slide-active.eael-as-centered-active,
+    .swiper-slide.swiper-slide-active{
+        /* Hook for users to style the active centered slide via Elementor */
+    }
+}
+

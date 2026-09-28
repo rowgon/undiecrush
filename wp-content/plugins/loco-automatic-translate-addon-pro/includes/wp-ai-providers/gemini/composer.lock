@@ -1,0 +1,78 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "d377878be6ee457a5b4a20d3b306eca6",
+    "packages": [
+        {
+            "name": "wordpress/ai-provider-for-google",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/ai-provider-for-google.git",
+                "reference": "f5262661575128014adabbd798ba86b5e22b6823"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WordPress/ai-provider-for-google/zipball/f5262661575128014adabbd798ba86b5e22b6823",
+                "reference": "f5262661575128014adabbd798ba86b5e22b6823",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/phpstan": "~2.1",
+                "slevomat/coding-standard": "^8.20",
+                "squizlabs/php_codesniffer": "^3.7 || ^4.0",
+                "wordpress/php-ai-client": "^0.4 || dev-trunk"
+            },
+            "suggest": {
+                "wordpress/php-ai-client": "Required. The core PHP AI Client SDK that this provider extends."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WordPress\\GoogleAiProvider\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "WordPress AI Team",
+                    "homepage": "https://make.wordpress.org/ai/"
+                }
+            ],
+            "description": "AI Provider for Google for the PHP AI Client SDK. Works as both a Composer package and WordPress plugin.",
+            "homepage": "https://github.com/WordPress/ai-provider-for-google",
+            "keywords": [
+                "Gemini",
+                "ai",
+                "google",
+                "llm",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/WordPress/ai-provider-for-google/issues",
+                "source": "https://github.com/WordPress/ai-provider-for-google"
+            },
+            "time": "2026-03-15T18:54:10+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

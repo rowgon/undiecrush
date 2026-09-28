@@ -1,0 +1,10 @@
+
+# Ignorar copias de seguridad de wp
+wp-content/ai1wm-backups/
+wp-content/backups-dup-pro/
+*.wpress
+*.zip
+
+# Ignorar subidas pesadas
+wp-content/uploads/
+

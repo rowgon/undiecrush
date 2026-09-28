@@ -1,0 +1,34 @@
+{
+    "name": "loco-automatic-translate-addon-pro/loco-automatic-translate-addon-pro",
+    "description": "Integrates AI-powered translation into the LocoAI – Auto Translate for Loco Translate (Pro) plugin",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "~1.0",
+        "felixarntz/wp-oop-plugin-lib": "^0.1.1",
+        "guzzlehttp/guzzle": "^7.9",
+        "psr/http-message": "^2.0",
+        "wordpress/wp-ai-client": "^0.4.0"
+    },
+    "autoload": {},
+    "config": {
+        "platform": {
+            "php": "7.4"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpcs": "phpcs --standard=WordPress",
+        "phpcbf": "phpcbf --standard=WordPress"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

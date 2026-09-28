@@ -1,0 +1,113 @@
+*** HUSKY - Products Filter Professional for WooCommerce ***
+
+2026.05.26 - version 3.4.0
+* Fixed: shortcode [woof_slideout] attribute tax_exclude
+* Tested with latest woocommerce version 10.9.1
+
+2026.05.29 - version 3.3.9
+* Fixed: settings not saving due to incorrect JSON decoding
+* Fixed: infinite recursion in stat extension caused by woof_get_request_data filter
+* Fixed: textarea fields showing wrong quotes and extra whitespace in admin
+* Fixed: radio reset button not working with iCheck
+* Fixed: PHP warning from file_put_contents in smart_designer extension
+* Improved: sanitization of request data to comply with WordPress coding standards
+
+2026.02.12 - version 3.3.8.1
+* Fixed issue with front_comprssd.js file
+
+2026.02.06 - version 3.3.8
+* Heap of small fixes
+
+2025.12.15 - version 3.3.7.4
+* Some small fixes
+* Security fix - thanks to Athiwat Tiprasaharn (Jitlada) and wordfence.com
+
+2025.11.25 - version 3.3.7.3
+* Some small fixes
+* Security fix - thanks to Athiwat Tiprasaharn (Jitlada) and wordfence.com
+
+2025.10.20 - version 3.3.7.2
+* Some small fixes
+* Security fix - thanks to LionTree and wordfence.com
+
+2025.06.13 - version 3.3.7.1
+* Set of small fixes
+* Security fix - thanks to LVT-tholv2k from Patchstack.com
+
+2025.05.23 - version 3.3.7
+* Bunch of small fixes
+* New option in tab Design: "Preserve the state of unchecked checkbox/radio hierarchy"
+
+2025.03.10 - version 3.3.6.6
+* Small fixes
+* Security fix - thanks to Hiroho from wordfence.com
+
+2025.02.21 - version 3.3.6.5
+* Security fix - thanks to Dimas Maulana from Patchstack.com
+
+2024.11.12 - version 3.3.6.4
+* Security fix - thanks to Daniel Scheidt from vorwerk.de
+
+2024.09.23 - version 3.3.6.3
+* Security fix - thanks to shaman0x01 from wordfence.com
+
+2024.08.01 - version 3.3.6.2
+* Security fix - thanks to Rafie Muhammad from Patchstack.com
+* Fix for WPML
+
+2024.07.10 - version 3.3.6.1
+* Security fix - thanks to Arkadiusz Hydzik from wordfence.com
+* Small fixes
+
+2024.05.27 - version 3.3.6
+* Security fix - thanks to Richard Telleng (stueotue) from wordfence.com
+* Bunch of small fixes
+* New features
+
+2024.03.14 - version 3.3.5.3
+* 2 security fixes - thanks to Wordfence.com
+* 1 security fix - thanks to Patchstack.com
+
+2024.03.05 - version 3.3.5.2
+* Security fix - thanks to Dhabaleshwar Das from Patchstack.com
+* Security fix - thanks to Krzysztof Zajac from Wordfence.com
+
+2024.01.16 - version 3.3.5.1
+* Security fix - thanks to Yudistira Arya from patchstack.com
+
+2024.01.11 - version 3.3.5
+* Bunch of small fixes
+* New features
+
+2023.09.22 - version 3.3.4.4
+* Security fix - thanks to Rafie M from patchstack.com
+
+2023.08.21 - version 3.3.4.3
+* 2 security fixes - thanks to Darius Sveikauskas from patchstack.com
+
+2023.07.26 - version 3.3.4.2
+* Fix for ACF extension
+* Added advanced option: Forcing disabling of functionality
+
+2023.07.18 - version 3.3.4.1
+* Fix for Smart Designer installation
+
+2023.07.17 - version 3.3.4
+* Heap of small fixes
+* Filter form Front Builder added
+
+2023.05.18 - version 3.3.3
+* Heap of small fixes
+* New features
+
+2023.01.10 - version 3.3.2
+* Rebranding: WOOF to HUSKY
+* Security fix - thanks to Animesh from WPScan
+
+2022.12.17 - version 3.3.1
+* New extension: Smart Designer
+* Security fix - thanks to Animesh from WPScan
+
+2022.09.14 - version 3.3.0
+* Code sanitizing
+* Code refactoring

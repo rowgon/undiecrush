@@ -1,0 +1,1631 @@
+.eael-pinterest-feed {
+	width: 100%;
+	margin: auto;
+
+	.eael-pinterest-feed-item {
+		display: inline-block;
+		line-height: 0;
+		vertical-align: top;
+	}
+
+	// Slider items must be block, not inline-block, or some browsers ignore Swiper's per-slide width.
+	&.eael-pinterest-feed-mode-slider .eael-pinterest-feed-item.swiper-slide {
+		display: block;
+	}
+
+	.eael-pinterest-feed-img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+
+	.eael-pinterest-feed-item-inner:hover .eael-pinterest-feed-img {
+		transform: scale(1.05);
+	}
+
+	&.eael-pinterest-feed-square-img {
+		.eael-pinterest-feed-item {
+			padding: 6px;
+			box-sizing: border-box;
+		}
+
+		.eael-pinterest-feed-item-inner {
+			position: relative;
+			overflow: hidden;
+			aspect-ratio: 1 / 1;
+			border-radius: 16px;
+			background: #f1f1f1; // visible while the image is loading
+			box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+			transition:
+				transform 0.25s ease,
+				box-shadow 0.25s ease;
+		}
+
+		.eael-pinterest-feed-item-inner:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+		}
+
+		.eael-pinterest-feed-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+
+	.eael-pinterest-feed-item,
+	.eael-pinterest-feed-item-inner {
+		position: relative;
+
+		.eael-pinterest-feed-caption-text {
+			font-size: 15px;
+			font-weight: 400;
+			line-height: 1.3;
+			color: #fff; // white by default — card skin overrides to dark
+		}
+
+		.eael-pinterest-feed-post-time {
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 30px;
+			color: rgba(255, 255, 255, 0.85);
+		}
+	}
+
+	.eael-pinterest-feed-error {
+		text-align: center;
+		padding: 40px 20px;
+		color: #666;
+
+		p {
+			margin: 0;
+			font-size: 16px;
+		}
+	}
+}
+
+.elementor-widget-eael-pinterest-feed {
+	.eael-load-more-button-wrap {
+		display: flex;
+		justify-content: center;
+		margin-top: 30px;
+
+		&.no-pagination {
+			display: none;
+		}
+	}
+
+	.eael-load-more-button {
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 14px;
+		font-weight: 600;
+		padding: 12px 40px;
+		border-radius: 8px;
+
+		&.button--loading {
+			pointer-events: none;
+			opacity: 0.7;
+		}
+
+		.eael-btn-loader {
+			display: none;
+			width: 16px;
+			height: 16px;
+			border: 2px solid transparent;
+			border-top: 2px solid currentColor;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		&.button--loading .eael-btn-loader {
+			display: block;
+		}
+	}
+
+	// Layout-specific Load More defaults — Elementor style controls override.
+	.eael-pf-mode-masonry .eael-load-more-button {
+		background: #b89a6e;
+		color: #fff;
+		&:hover {
+			background: #a5895e;
+		}
+	}
+
+	.eael-pf-mode-grid .eael-load-more-button {
+		background: #133a5e;
+		color: #fff;
+		&:hover {
+			background: #0f2e4d;
+		}
+	}
+
+	.eael-pf-layout-layout-4 .eael-load-more-button {
+		background: #e60023;
+		color: #fff;
+		&:hover {
+			background: #c4001e;
+		}
+	}
+}
+
+.eael-pinterest-feed.eael-pinterest-feed-overlay.eael-pinterest-feed-overlay-always {
+	.eael-pinterest-feed-item-inner {
+		overflow: hidden;
+		border-radius: 16px;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+	}
+
+	.eael-pinterest-feed-item,
+	.eael-pinterest-feed-item-inner {
+		.eael-pinterest-feed-caption {
+			position: absolute;
+			top: auto;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			opacity: 1;
+			transform: scale(1);
+			padding: 48px 16px 18px;
+		}
+	}
+
+	.eael-pinterest-feed-caption-text {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 2px;
+		line-height: 1.3;
+		color: #fff;
+	}
+
+	.eael-pinterest-feed-post-time {
+		font-size: 12px;
+		line-height: 1.4;
+		font-weight: 400;
+		color: rgba(255, 255, 255, 0.85);
+	}
+}
+
+.eael-pinterest-feed-mode-masonry.eael-pinterest-feed-overlay.eael-pinterest-feed-overlay-always {
+	.eael-pinterest-feed-item,
+	.eael-pinterest-feed-item-inner {
+		.eael-pinterest-feed-caption {
+			background: linear-gradient(to top, #cfaf87 0%, rgba(255, 255, 255, 0) 100%);
+		}
+	}
+
+	.eael-pinterest-feed-caption-text {
+		color: #fff;
+	}
+	.eael-pinterest-feed-post-time {
+		color: rgba(255, 255, 255, 0.85);
+	}
+}
+
+.eael-pinterest-feed-mode-grid.eael-pinterest-feed-overlay.eael-pinterest-feed-overlay-always {
+	.eael-pinterest-feed-item,
+	.eael-pinterest-feed-item-inner {
+		.eael-pinterest-feed-caption {
+			background: linear-gradient(to top, #133a5e 0%, rgba(255, 255, 255, 0) 100%);
+		}
+	}
+
+	.eael-pinterest-feed-caption-text {
+		color: #fff;
+	}
+	.eael-pinterest-feed-post-time {
+		color: rgba(255, 255, 255, 0.85);
+	}
+}
+
+.eael-pinterest-feed-overlay-always {
+	.eael-pinterest-feed-caption-inner {
+		display: block;
+	}
+
+	.eael-pinterest-feed-caption-text {
+		display: block;
+		margin-bottom: 6px;
+	}
+
+	.eael-pinterest-feed-meta {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		font-size: 12px;
+		line-height: 1.3;
+		color: rgba(255, 255, 255, 0.85);
+		flex-wrap: wrap;
+
+		span {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			max-width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		i {
+			font-size: 11px;
+			opacity: 0.85;
+		}
+	}
+}
+
+// Skin 3 (Overlay Hover): scoped to `.eael-pinterest-feed-overlay` WITHOUT `-overlay-always`.
+.eael-pinterest-feed.eael-pinterest-feed-overlay:not(.eael-pinterest-feed-overlay-always) {
+	.eael-pinterest-feed-item-inner {
+		position: relative;
+		overflow: hidden;
+		border-radius: 10px;
+	}
+
+	.eael-pinterest-feed-caption {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		padding: 24px 20px;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0) 100%);
+		color: #fff;
+		opacity: 0;
+		transition: opacity 350ms ease;
+	}
+
+	.eael-pinterest-feed-caption-inner {
+		transform: translateY(16px);
+		transition: transform 350ms ease;
+	}
+
+	.eael-pinterest-feed-caption-text {
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 1.35;
+		margin-bottom: 8px;
+		color: #fff;
+	}
+
+	.eael-pinterest-feed-meta {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		font-size: 13px;
+		color: rgba(255, 255, 255, 0.85);
+
+		span {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+		}
+
+		i {
+			font-size: 12px;
+		}
+	}
+
+	.eael-pinterest-feed-item-inner:hover {
+		.eael-pinterest-feed-caption {
+			opacity: 1;
+		}
+		.eael-pinterest-feed-caption-inner {
+			transform: translateY(0);
+		}
+	}
+}
+
+// Caption Top Style
+.eael-pinterest-feed-caption-top {
+	&.eael-pinterest-feed.eael-pinterest-feed-overlay.eael-pinterest-feed-overlay-always {
+		.eael-pinterest-feed-item,
+		.eael-pinterest-feed-item-inner {
+			.eael-pinterest-feed-caption {
+				top: 0;
+				bottom: auto;
+				padding: 18px 16px 48px;
+			}
+		}
+
+		&.eael-pinterest-feed-mode-masonry .eael-pinterest-feed-caption {
+			background: linear-gradient(to bottom, #cfaf87 0%, rgba(255, 255, 255, 0) 100%);
+		}
+
+		&.eael-pinterest-feed-mode-grid .eael-pinterest-feed-caption {
+			background: linear-gradient(to bottom, #133a5e 0%, rgba(255, 255, 255, 0) 100%);
+		}
+	}
+
+	// Hover overlay.
+	&.eael-pinterest-feed-overlay:not(.eael-pinterest-feed-overlay-always) {
+		.eael-pinterest-feed-caption {
+			justify-content: flex-start;
+			background: linear-gradient(
+				to bottom,
+				rgba(0, 0, 0, 0.82) 0%,
+				rgba(0, 0, 0, 0.35) 55%,
+				rgba(0, 0, 0, 0) 100%
+			);
+		}
+
+		.eael-pinterest-feed-caption-inner {
+			transform: translateY(-16px);
+		}
+
+		.eael-pinterest-feed-item-inner:hover .eael-pinterest-feed-caption-inner {
+			transform: translateY(0);
+		}
+	}
+}
+
+.eael-pinterest-feed.eael-pinterest-feed-overlay {
+	.eael-pinterest-feed-domain {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		padding: 5px 10px;
+		background: rgba(255, 255, 255, 0.96);
+		color: #111;
+		font-size: 11px;
+		font-weight: 600;
+		line-height: 1;
+		border-radius: 999px;
+		max-width: calc(100% - 24px);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(-4px);
+		transition:
+			opacity 220ms ease,
+			transform 220ms ease;
+
+		i {
+			font-size: 9px;
+			opacity: 0.7;
+		}
+	}
+
+	.eael-pinterest-feed-item-inner:hover .eael-pinterest-feed-domain {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.eael-pinterest-feed-board,
+	.eael-pinterest-feed-domain-inline {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		max-width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	// When both are visible, board takes priority on the left; domain shrinks to fit.
+	.eael-pinterest-feed-board + .eael-pinterest-feed-domain-inline {
+		flex: 0 1 auto;
+	}
+}
+
+// CSS columns avoid JS-driven masonry layout.
+.eael-pinterest-feed-mode-masonry {
+	column-count: 3; // overridden per-widget by Elementor responsive selector
+	column-gap: 0; // gap is handled by item padding from the spacing control
+
+	.eael-pinterest-feed-item {
+		display: block;
+		width: 100%;
+		float: none;
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	@media only screen and (max-width: 767px) {
+		column-count: 1;
+	}
+}
+
+.eael-pinterest-feed-mode-grid {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+
+	.eael-pinterest-feed-item {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+
+		.eael-pinterest-feed-item-inner {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		// Default 2:3 aspect-ratio; overridden by the Elementor "Image Height" slider via custom property.
+		.eael-pinterest-feed-img {
+			aspect-ratio: var(--eael-pf-img-ratio, 2 / 3);
+			object-fit: cover;
+			height: auto;
+		}
+	}
+}
+
+.eael-pf-layout-layout-4 {
+	.eael-pinterest-feed-item {
+		box-sizing: border-box;
+	}
+
+	.eael-pinterest-feed-item-inner {
+		display: flex;
+		flex-direction: column;
+		background: #fff;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow:
+			0 2px 12px rgba(17, 17, 26, 0.06),
+			0 1px 4px rgba(17, 17, 26, 0.04);
+		transition: box-shadow 280ms ease;
+
+		&:hover {
+			box-shadow:
+				0 14px 40px rgba(17, 17, 26, 0.1),
+				0 4px 14px rgba(17, 17, 26, 0.06);
+		}
+	}
+
+	.eael-pinterest-feed-item-header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 14px 16px;
+
+		.eael-pinterest-feed-item-user {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex: 1;
+			min-width: 0;
+		}
+
+		.eael-pinterest-feed-user-info {
+			min-width: 0;
+		}
+
+		.eael-pinterest-feed-username {
+			font-size: 15px;
+			font-weight: 600;
+			line-height: 1.3;
+			color: #1a1a1a;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.eael-pinterest-feed-post-time {
+			font-size: 12px;
+			color: #6b7280;
+			white-space: nowrap;
+			line-height: 1.3;
+		}
+	}
+
+	.eael-pinterest-feed-item-content {
+		display: block;
+		overflow: hidden;
+
+		> a {
+			display: block;
+			text-decoration: none;
+		}
+	}
+
+	.eael-pinterest-feed-item-footer {
+		padding: 14px 16px 16px;
+
+		.eael-pinterest-feed-description {
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #4b5563;
+			margin-bottom: 8px;
+		}
+
+		.eael-pinterest-feed-read-more {
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+			font-size: 13px;
+			font-weight: 600;
+			color: #1a1a1a;
+			text-decoration: none;
+			transition: color 0.2s ease;
+
+			i {
+				font-size: 10px;
+				transition: transform 0.2s ease;
+			}
+
+			&:hover {
+				color: #e60023;
+				i {
+					transform: translateX(3px);
+				}
+			}
+		}
+
+		.eael-pinterest-feed-caption-text {
+			margin-top: 10px;
+			margin-bottom: 0;
+			font-size: 16px;
+			font-weight: 600;
+			line-height: 1.4;
+			color: #1a1a1a;
+		}
+	}
+}
+
+@media only screen and (min-width: 1025px) {
+	.pinterest-feed-eael-col-1 {
+		position: relative;
+	}
+	.pinterest-feed-eael-col-1 .eael-pinterest-feed-item {
+		width: 100%;
+		float: left;
+	}
+	.pinterest-feed-eael-col-2 {
+		position: relative;
+	}
+	.pinterest-feed-eael-col-2 .eael-pinterest-feed-item {
+		width: 50%;
+		float: left;
+	}
+	.pinterest-feed-eael-col-2 .eael-pinterest-feed-item:nth-of-type(2n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-eael-col-2 .eael-pinterest-feed-item:nth-of-type(2n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-eael-col-3 {
+		position: relative;
+	}
+	.pinterest-feed-eael-col-3 .eael-pinterest-feed-item {
+		width: 33.3333%;
+		float: left;
+	}
+	.pinterest-feed-eael-col-3 .eael-pinterest-feed-item:nth-of-type(3n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-eael-col-3 .eael-pinterest-feed-item:nth-of-type(3n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-eael-col-4 {
+		position: relative;
+	}
+	.pinterest-feed-eael-col-4 .eael-pinterest-feed-item {
+		width: 25%;
+		float: left;
+	}
+	.pinterest-feed-eael-col-4 .eael-pinterest-feed-item:nth-of-type(4n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-eael-col-4 .eael-pinterest-feed-item:nth-of-type(4n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-eael-col-5 {
+		position: relative;
+	}
+	.pinterest-feed-eael-col-5 .eael-pinterest-feed-item {
+		width: 20%;
+		float: left;
+	}
+	.pinterest-feed-eael-col-5 .eael-pinterest-feed-item:nth-of-type(5n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-eael-col-5 .eael-pinterest-feed-item:nth-of-type(5n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-eael-col-6 {
+		position: relative;
+	}
+	.pinterest-feed-eael-col-6 .eael-pinterest-feed-item {
+		width: 16.666%;
+		float: left;
+	}
+	.pinterest-feed-eael-col-6 .eael-pinterest-feed-item:nth-of-type(6n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-eael-col-6 .eael-pinterest-feed-item:nth-of-type(6n + 1) {
+		clear: left;
+	}
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 766px) {
+	.pinterest-feed-tablet-eael-col-1 {
+		position: relative;
+	}
+	.pinterest-feed-tablet-eael-col-1 .eael-pinterest-feed-item {
+		width: 100%;
+		float: left;
+	}
+	.pinterest-feed-tablet-eael-col-2 {
+		position: relative;
+	}
+	.pinterest-feed-tablet-eael-col-2 .eael-pinterest-feed-item {
+		width: 50%;
+		float: left;
+	}
+	.pinterest-feed-tablet-eael-col-2 .eael-pinterest-feed-item:nth-of-type(2n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-tablet-eael-col-2 .eael-pinterest-feed-item:nth-of-type(2n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-tablet-eael-col-3 {
+		position: relative;
+	}
+	.pinterest-feed-tablet-eael-col-3 .eael-pinterest-feed-item {
+		width: 33.3333%;
+		float: left;
+	}
+	.pinterest-feed-tablet-eael-col-3 .eael-pinterest-feed-item:nth-of-type(3n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-tablet-eael-col-3 .eael-pinterest-feed-item:nth-of-type(3n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-tablet-eael-col-4 {
+		position: relative;
+	}
+	.pinterest-feed-tablet-eael-col-4 .eael-pinterest-feed-item {
+		width: 25%;
+		float: left;
+	}
+	.pinterest-feed-tablet-eael-col-4 .eael-pinterest-feed-item:nth-of-type(4n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-tablet-eael-col-4 .eael-pinterest-feed-item:nth-of-type(4n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-tablet-eael-col-5 {
+		position: relative;
+	}
+	.pinterest-feed-tablet-eael-col-5 .eael-pinterest-feed-item {
+		width: 20%;
+		float: left;
+	}
+	.pinterest-feed-tablet-eael-col-5 .eael-pinterest-feed-item:nth-of-type(5n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-tablet-eael-col-5 .eael-pinterest-feed-item:nth-of-type(5n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-tablet-eael-col-6 {
+		position: relative;
+	}
+	.pinterest-feed-tablet-eael-col-6 .eael-pinterest-feed-item {
+		width: 16%;
+		float: left;
+	}
+	.pinterest-feed-tablet-eael-col-6 .eael-pinterest-feed-item:nth-of-type(6n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-tablet-eael-col-6 .eael-pinterest-feed-item:nth-of-type(6n + 1) {
+		clear: left;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.pinterest-feed-mobile-eael-col-1 {
+		position: relative;
+	}
+	.pinterest-feed-mobile-eael-col-1 .eael-pinterest-feed-item {
+		width: 100%;
+		float: left;
+	}
+	.pinterest-feed-mobile-eael-col-2 {
+		position: relative;
+	}
+	.pinterest-feed-mobile-eael-col-2 .eael-pinterest-feed-item {
+		width: 50%;
+		float: left;
+	}
+	.pinterest-feed-mobile-eael-col-2 .eael-pinterest-feed-item:nth-of-type(2n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-mobile-eael-col-2 .eael-pinterest-feed-item:nth-of-type(2n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-mobile-eael-col-3 {
+		position: relative;
+	}
+	.pinterest-feed-mobile-eael-col-3 .eael-pinterest-feed-item {
+		width: 33.3333%;
+		float: left;
+	}
+	.pinterest-feed-mobile-eael-col-3 .eael-pinterest-feed-item:nth-of-type(3n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-mobile-eael-col-3 .eael-pinterest-feed-item:nth-of-type(3n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-mobile-eael-col-4 {
+		position: relative;
+	}
+	.pinterest-feed-mobile-eael-col-4 .eael-pinterest-feed-item {
+		width: 25%;
+		float: left;
+	}
+	.pinterest-feed-mobile-eael-col-4 .eael-pinterest-feed-item:nth-of-type(4n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-mobile-eael-col-4 .eael-pinterest-feed-item:nth-of-type(4n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-mobile-eael-col-5 {
+		position: relative;
+	}
+	.pinterest-feed-mobile-eael-col-5 .eael-pinterest-feed-item {
+		width: 20%;
+		float: left;
+	}
+	.pinterest-feed-mobile-eael-col-5 .eael-pinterest-feed-item:nth-of-type(5n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-mobile-eael-col-5 .eael-pinterest-feed-item:nth-of-type(5n + 1) {
+		clear: left;
+	}
+	.pinterest-feed-mobile-eael-col-6 {
+		position: relative;
+	}
+	.pinterest-feed-mobile-eael-col-6 .eael-pinterest-feed-item {
+		width: 16%;
+		float: left;
+	}
+	.pinterest-feed-mobile-eael-col-6 .eael-pinterest-feed-item:nth-of-type(6n) {
+		margin-right: 0 !important;
+	}
+	.pinterest-feed-mobile-eael-col-6 .eael-pinterest-feed-item:nth-of-type(6n + 1) {
+		clear: left;
+	}
+}
+
+.eael-pinterest-feed-mode-slider.swiper {
+	overflow: hidden;
+	background: #fff9f9;
+	padding: 44px 40px 28px;
+	border-radius: 16px;
+
+	.swiper-wrapper {
+		align-items: stretch;
+	}
+
+	.eael-pinterest-feed-item {
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		height: auto;
+
+		.eael-pinterest-feed-item-inner {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			background: #fff;
+			border-radius: 8px;
+			overflow: hidden;
+			transition: box-shadow 0.3s ease;
+
+			// TODO: A controller needs to be added for the hover functionality.
+			//box-shadow: 0 46px 27px rgba(0, 1, 35, 0.04);
+			//&:hover {
+			//	box-shadow: 0 50px 30px rgba(0, 1, 35, 0.08);
+			//}
+		}
+
+		.eael-pf-card-link {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.eael-pf-card-image {
+			position: relative;
+			overflow: hidden;
+			background: #f5f5f5;
+			border-radius: 8px;
+
+			.eael-pinterest-feed-img {
+				width: 100%;
+				aspect-ratio: var(--eael-pf-img-ratio, 312 / 414);
+				object-fit: cover;
+				display: block;
+				border-radius: 8px;
+			}
+		}
+
+		// Body anchors the chip absolutely so it can straddle the image/body seam without affecting layout.
+		.eael-pf-card-body {
+			position: relative;
+			padding: 28px 24px 20px;
+			background: #fff;
+			flex: 1;
+			min-height: 70px;
+		}
+
+		.eael-pf-card-chip {
+			position: absolute;
+			top: -16px;
+			left: 20px;
+			right: 20px;
+			z-index: 2;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			width: fit-content;
+			max-width: calc(100% - 40px);
+			padding: 6px 12px;
+			background: #fff;
+			border: 1px solid #e5e7eb;
+			border-radius: 999px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			color: #454343;
+			font-size: 12px;
+			font-weight: 500;
+			line-height: 1.2;
+
+			i {
+				font-size: 11px;
+				color: #c48a82;
+				flex-shrink: 0;
+			}
+
+			span {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+
+		.eael-pf-card-title {
+			margin: 0 0 4px 0;
+			color: #454343;
+			font-size: 15px;
+			font-weight: 600;
+			line-height: 1.3;
+			text-transform: capitalize;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.eael-pf-card-date {
+			color: #454343;
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 1.4;
+			text-transform: capitalize;
+		}
+
+		.eael-pf-card-description {
+			margin-top: 10px;
+			color: #6b7280;
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		.eael-pf-card-meta {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			margin-top: 12px;
+
+			.eael-pf-card-read-more {
+				display: inline-flex;
+				align-items: center;
+				gap: 4px;
+				color: #e60023;
+				font-size: 13px;
+				font-weight: 600;
+
+				i {
+					font-size: 10px;
+				}
+			}
+		}
+	}
+
+	.eael-pf-pagination {
+		text-align: center;
+		margin-top: 22px;
+		position: relative;
+
+		.swiper-pagination-bullet {
+			width: 10px;
+			height: 10px;
+			background: #e8c7c2;
+			opacity: 1;
+			margin: 0 5px;
+			border-radius: 50%;
+			display: inline-block;
+			cursor: pointer;
+			transition:
+				background 0.3s ease,
+				transform 0.3s ease;
+
+			&.swiper-pagination-bullet-active {
+				background: #c48a82;
+				transform: scale(1.15);
+			}
+		}
+	}
+
+	.eael-pf-arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 10;
+		width: 38px;
+		height: 38px;
+		background: #fff;
+		border-radius: 50%;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition:
+			background 0.2s ease,
+			box-shadow 0.2s ease;
+
+		&:hover {
+			background: #f5f5f5;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+		}
+
+		&::after {
+			display: none; // Swiper renders its own arrow text via ::after — hide it so our icon shows.
+		}
+
+		i {
+			font-size: 16px;
+			color: #333;
+			line-height: 1;
+		}
+
+		&.eael-pf-arrow-prev {
+			left: 12px;
+		}
+
+		&.eael-pf-arrow-next {
+			right: 12px;
+		}
+
+		&.swiper-button-disabled {
+			opacity: 0.4;
+			cursor: default;
+		}
+	}
+}
+
+// Skin 3 on the slider layout: override the slider's default card-footer chrome to a full-image hover overlay.
+.eael-pinterest-feed-mode-slider.eael-pinterest-feed-overlay:not(.eael-pinterest-feed-overlay-always) {
+	.eael-pinterest-feed-item {
+		.eael-pinterest-feed-item-inner {
+			overflow: hidden;
+			border-radius: 14px;
+			background: #000; // fallback behind the image while loading
+
+			// Reset the slider's default flex-column anchor so it doesn't stretch and leave whitespace below the image.
+			> a {
+				display: block;
+				position: relative;
+				flex: none;
+			}
+		}
+
+		.eael-pinterest-feed-img {
+			border-radius: 0;
+			aspect-ratio: var(--eael-pf-img-ratio, 2 / 3);
+			object-fit: cover;
+			display: block;
+			width: 100%;
+		}
+
+		.eael-pinterest-feed-caption {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			padding: 24px 20px;
+			background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.35) 55%, rgba(0, 0, 0, 0) 100%);
+			border-radius: 0;
+			color: #fff;
+			opacity: 0;
+			transition: opacity 350ms ease;
+		}
+
+		.eael-pinterest-feed-caption-inner {
+			transform: translateY(16px);
+			transition: transform 350ms ease;
+		}
+
+		.eael-pinterest-feed-caption-text {
+			color: #fff;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 1.35;
+			margin-bottom: 6px;
+		}
+
+		.eael-pinterest-feed-meta {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			font-size: 13px;
+			color: rgba(255, 255, 255, 0.85);
+
+			span {
+				display: inline-flex;
+				align-items: center;
+				gap: 5px;
+			}
+
+			i {
+				font-size: 12px;
+			}
+		}
+
+		.eael-pinterest-feed-post-time {
+			color: rgba(255, 255, 255, 0.85);
+			font-size: 13px;
+		}
+
+		.eael-pinterest-feed-item-inner:hover {
+			.eael-pinterest-feed-caption {
+				opacity: 1;
+			}
+			.eael-pinterest-feed-caption-inner {
+				transform: translateY(0);
+			}
+		}
+	}
+}
+
+.eael-pinterest-feed-profile-header {
+	margin-bottom: 24px;
+	line-height: 1.4;
+	padding: 20px 28px;
+	background: #fff;
+	border: 1px solid #f1f1f3;
+	border-radius: 12px;
+
+	.eael-pf-header-inner {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+	}
+
+	.eael-pf-header-user {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		min-width: 0;
+	}
+
+	.eael-pf-avatar {
+		width: 56px;
+		height: 56px;
+		border-radius: 50%;
+		object-fit: cover;
+		flex-shrink: 0;
+	}
+
+	.eael-pf-header-username {
+		font-size: 20px;
+		font-weight: 700;
+		color: #1a1a1a;
+		line-height: 1.25;
+	}
+
+	// Order is controlled by HTML output (stats-first vs button-first).
+	.eael-pf-header-meta {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		margin-left: auto;
+	}
+
+	.eael-pf-stats {
+		display: flex;
+		align-items: center;
+		gap: 18px;
+	}
+
+	.eael-pf-stat {
+		font-size: 14px;
+		color: #6b7280;
+		white-space: nowrap;
+		line-height: 1.3;
+	}
+
+	.eael-pf-follow-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 20px 8px 14px;
+		background: #c8232c;
+		color: #fff;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1;
+		border-radius: 999px;
+		text-decoration: none;
+		transition:
+			background 0.2s ease,
+			box-shadow 0.2s ease;
+		white-space: nowrap;
+
+		.eael-pf-follow-icon {
+			font-size: 18px;
+			line-height: 1;
+			color: #fff;
+		}
+
+		.eael-pf-follow-label {
+			line-height: 1;
+		}
+
+		&:hover,
+		&:focus {
+			background: #a81923;
+			color: #fff;
+			box-shadow: 0 2px 6px rgba(200, 35, 44, 0.35);
+		}
+	}
+
+	// Inline header stacks vertically below 600px so nothing overflows.
+	&.eael-pf-header-style-inline {
+		@media (max-width: 600px) {
+			.eael-pf-header-inner {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 16px;
+			}
+			.eael-pf-header-meta {
+				margin-left: 0;
+				flex-wrap: wrap;
+			}
+		}
+	}
+
+	&.eael-pf-header-style-stacked {
+		padding: 28px 24px;
+
+		.eael-pf-header-inner {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			gap: 14px;
+		}
+		.eael-pf-header-user {
+			flex-direction: column;
+			gap: 10px;
+		}
+		.eael-pf-avatar {
+			width: 72px;
+			height: 72px;
+		}
+		.eael-pf-header-username {
+			font-size: 22px;
+		}
+		.eael-pf-header-meta {
+			margin-left: 0;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+	}
+}
+
+.eael-pf-board-card {
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	text-decoration: none;
+	box-shadow:
+		0 2px 12px rgba(17, 17, 26, 0.06),
+		0 1px 4px rgba(17, 17, 26, 0.04);
+	transition: box-shadow 280ms ease;
+	position: relative;
+
+	&:hover {
+		box-shadow:
+			0 14px 40px rgba(17, 17, 26, 0.1),
+			0 4px 14px rgba(17, 17, 26, 0.06);
+	}
+
+	.eael-pf-board-cover {
+		display: grid;
+		gap: 2px;
+		overflow: hidden;
+		background: #f1f1f1;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+
+		&.eael-pf-board-cover-single-image {
+			grid-template-columns: 1fr;
+			aspect-ratio: 4 / 3;
+		}
+
+		&.eael-pf-board-cover-split-2 {
+			grid-template-columns: repeat(2, 1fr);
+			aspect-ratio: 2 / 1;
+		}
+
+		// Mosaic: first image spans both rows; remaining two stack on the right.
+		&.eael-pf-board-cover-mosaic-3 {
+			grid-template-columns: 2fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			aspect-ratio: 3 / 2;
+
+			img:first-child {
+				grid-row: span 2;
+			}
+		}
+
+		&.eael-pf-board-cover-grid-4 {
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+			aspect-ratio: 1 / 1;
+		}
+
+		&.eael-pf-board-cover-multi-image {
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+			aspect-ratio: 3 / 2;
+		}
+	}
+
+	.eael-pf-board-info {
+		padding: 14px 16px;
+	}
+
+	.eael-pf-board-name {
+		font-size: 17px;
+		font-weight: 700;
+		color: #1a1a1a;
+		line-height: 1.3;
+		margin-bottom: 4px;
+	}
+
+	.eael-pf-board-pin-count {
+		font-size: 13px;
+		color: #6b7280;
+		line-height: 1.4;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+// Layout 5 (Featured Slider): one pin per slide, image-left + content-right magazine spread. Stacks on mobile.
+.eael-pinterest-feed.eael-pf-layout-layout-5 {
+	// Constrain the single card so it doesn't stretch edge-to-edge on wide sections.
+	.eael-pinterest-feed-item-inner {
+		background: #fff;
+		border-radius: 24px;
+		overflow: hidden;
+		transition: box-shadow 0.25s ease;
+		max-width: 920px;
+		margin: 0 auto;
+
+		// TODO: A controller needs to be added for the hover functionality.
+		//box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+		//&:hover {
+		//	box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+		//}
+	}
+
+	// Grid (not flex) so the image cell's aspect-ratio holds when body content grows tall.
+	.eael-pf-editorial-link {
+		display: grid;
+		grid-template-columns: 45% 1fr;
+		text-decoration: none;
+		color: inherit;
+		line-height: 1.5;
+
+		@media (max-width: 767px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.eael-pf-editorial-image {
+		overflow: hidden;
+		background: #f5f5f5;
+		line-height: 0;
+		aspect-ratio: 4 / 5;
+
+		@media (max-width: 767px) {
+			aspect-ratio: 16 / 10;
+		}
+
+		.eael-pinterest-feed-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+
+	.eael-pf-editorial-body {
+		padding: 40px 48px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 14px;
+		color: #515151;
+		min-width: 0;
+
+		@media (max-width: 991px) {
+			padding: 32px 36px;
+		}
+		@media (max-width: 767px) {
+			padding: 26px 24px 30px;
+		}
+	}
+
+	.eael-pf-editorial-board {
+		font-size: 12px;
+		font-weight: 600;
+		color: #964162;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		margin: 0;
+	}
+
+	.eael-pf-editorial-title {
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 1.3;
+		margin: 0;
+		color: #2a2a2a;
+		text-transform: capitalize;
+	}
+
+	// Pull date tight under title, overriding the body's flex gap.
+	.eael-pf-editorial-title + .eael-pf-editorial-date {
+		margin-top: -8px;
+	}
+
+	.eael-pf-editorial-date {
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.3;
+		color: #6b7280;
+	}
+
+	.eael-pf-editorial-description {
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.7;
+		color: #515151;
+		margin: 0;
+		text-transform: capitalize;
+	}
+
+	.eael-pf-editorial-url {
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: 13px;
+		font-style: italic;
+		line-height: 1.7;
+		color: #9b9b9b;
+		overflow-wrap: anywhere;
+	}
+
+	.eael-pf-editorial-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		align-self: flex-start;
+		margin-top: 4px;
+		padding: 10px 18px;
+		background: #964162;
+		color: #fff;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.4;
+		text-transform: capitalize;
+		border-radius: 8px;
+		transition:
+			background 0.2s ease,
+			transform 0.2s ease;
+
+		i {
+			font-size: 12px;
+		}
+	}
+
+	.eael-pinterest-feed-item-inner:hover .eael-pf-editorial-button {
+		background: #7e3753;
+		transform: translateY(-1px);
+	}
+}
+
+.eael-pinterest-feed.eael-pf-layout-layout-3 {
+	.eael-pinterest-feed-item {
+		margin-bottom: 16px;
+		line-height: 0;
+	}
+
+	.eael-pinterest-feed-item-inner {
+		background: transparent;
+		border-radius: 0;
+		overflow: visible;
+		transition: transform 0.3s ease;
+	}
+
+	.eael-pf-polaroid-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.eael-pf-polaroid-frame {
+		background: #fff;
+		padding: 10px 10px 14px;
+		box-shadow:
+			0 2px 8px rgba(0, 0, 0, 0.08),
+			0 8px 22px rgba(0, 0, 0, 0.05);
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+		transform-origin: center bottom;
+	}
+
+	.eael-pinterest-feed-item-inner:hover .eael-pf-polaroid-frame {
+		transform: rotate(-1.2deg) translateY(-3px);
+		box-shadow:
+			0 6px 18px rgba(0, 0, 0, 0.12),
+			0 18px 40px rgba(0, 0, 0, 0.08);
+	}
+
+	// Alternate rotation direction so the wall feels organic.
+	.eael-pinterest-feed-item:nth-child(even) .eael-pinterest-feed-item-inner:hover .eael-pf-polaroid-frame {
+		transform: rotate(1.2deg) translateY(-3px);
+	}
+
+	// Always-tilt: the alternating rotation becomes the resting state.
+	&.eael-pf-polaroid-always-tilt {
+		.eael-pf-polaroid-frame {
+			transform: rotate(-1.2deg);
+		}
+		.eael-pinterest-feed-item:nth-child(even) .eael-pf-polaroid-frame {
+			transform: rotate(1.2deg);
+		}
+		.eael-pinterest-feed-item-inner:hover .eael-pf-polaroid-frame {
+			transform: rotate(-1.2deg) translateY(-4px);
+		}
+		.eael-pinterest-feed-item:nth-child(even) .eael-pinterest-feed-item-inner:hover .eael-pf-polaroid-frame {
+			transform: rotate(1.2deg) translateY(-4px);
+		}
+	}
+
+	.eael-pf-polaroid-image {
+		line-height: 0;
+		overflow: hidden;
+		background: #f3f3f3;
+
+		.eael-pinterest-feed-img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
+
+	.eael-pf-polaroid-caption {
+		padding: 14px 6px 4px;
+		text-align: center;
+		line-height: 1.3;
+	}
+
+	.eael-pf-polaroid-title {
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: 15px;
+		font-style: italic;
+		font-weight: 500;
+		color: #2c2c2c;
+		margin: 0 0 6px;
+		display: -webkit-box;
+		-webkit-line-clamp: var(--eael-pf-title-lines, 2);
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.eael-pf-polaroid-meta {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 4px 10px;
+		font-size: 11px;
+		color: #888;
+		letter-spacing: 0.02em;
+
+		.eael-pf-polaroid-board::before {
+			content: "·";
+			margin-right: 10px;
+			color: #ccc;
+		}
+
+		.eael-pf-polaroid-board:first-child::before {
+			content: none;
+			margin: 0;
+		}
+
+		.eael-pf-polaroid-domain::before {
+			content: "·";
+			margin-right: 10px;
+			color: #ccc;
+		}
+	}
+}
+
+.eael-pf-credit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	margin-top: 16px;
+	font-size: 12px;
+	line-height: 1;
+	color: #767676;
+	letter-spacing: 0.02em;
+
+	.eael-pf-credit-mark {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		color: #e60023;
+		font-weight: 700;
+	}
+
+	.eael-pf-credit-icon {
+		font-size: 14px;
+		line-height: 1;
+	}
+
+	.eael-pf-credit-text {
+		line-height: 1;
+	}
+}

@@ -1,0 +1,2 @@
+<label <?php echo $this->attr('age-gate-' . $key . '-label') ?>><?php echo esc_html($label) ?></label><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<input <?php echo $this->attr('age-gate-' . $key . '-input') ?> placeholder="<?php echo esc_attr($placeholder) ?>" required value="<?php echo esc_attr($value) ?>" /><?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

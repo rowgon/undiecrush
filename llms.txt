@@ -1,0 +1,28 @@
+# UndieCrush - Boutique de Lencería Fina y Bienestar Íntimo
+
+> Tienda online y marketplace premium en Venezuela especializada en lencería elegante, bienestar de parejas, juguetes íntimos de alta calidad y artículos de sensualidad con garantía absoluta de privacidad y envíos 100% discretos.
+
+## Sobre Nosotros
+UndieCrush (https://undiecrush.com/) es el destino líder para parejas y personas que buscan explorar su intimidad con elegancia, seguridad y confianza. Todos nuestros envíos se despachan bajo un estricto protocolo de confidencialidad en empaques totalmente sellados, opacos y sin ninguna identificación externa del contenido ni de la tienda.
+
+## Categorías Principales y Catálogo
+- [Tienda Principal](/tienda/): Catálogo completo de productos para intimidad y sensualidad.
+- [Lencería Fina](/categoria-producto/lenceria/): Conjuntos, bodys, babydolls, corsés y lencería erótica de diseño.
+- [Juguetes Íntimos](/categoria-producto/juguetes/): Vibradores, succionadores, masajeadores y estimuladores de última tecnología para parejas o uso individual.
+- [Bienestar y Cuidado](/categoria-producto/bienestar/): Lubricantes premium base agua y silicona, aceites de masaje sensitivos, feromonas e higiene íntima.
+- [BDSM y Sensualidad](/categoria-producto/bdsm/): Kit de iniciación, esposas acolchadas, vendas, fustas y accesorios para juegos de rol.
+- [Outlet / Ofertas Específicas](/categoria-producto/outlet/): Promociones exclusivas y descuentos de temporada.
+
+## Blog y Guías de Educación Íntima
+- [Blog de UndieCrush](/blog/): Artículos de salud relacional, guías de compra de lencería y consejos de intimidad para parejas.
+
+## Políticas y Garantías para Clientes
+- **Envío 100% Discreto**: Cajas y bolsas de seguridad sin logotipos ni descripción exterior.
+- **Envíos a Nivel Nacional**: Despachos a toda Venezuela (Zoom, MRW, Tealca y delivery express en zonas locales).
+- **Múltiples Métodos de Pago**: Pago Móvil, transferencias bancarias (BACS), Zelle, USDT / Criptomonedas y efectivo.
+- **Atención Personalizada**: Asesoría confidencial y discreta para elegir la talla o producto perfecto.
+
+## Enlaces Rápidos para Navegación de Agentes de IA
+- [Mi Cuenta / Inicio de Sesión](/mi-cuenta/)
+- [Carrito de Compras](/carrito/)
+- [Finalizar Compra / Checkout](/finalizar-compra/)

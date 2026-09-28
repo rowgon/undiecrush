@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Dokan Pro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-11 01:34+0000\n"
+"PO-Revision-Date: 2023-10-11 01:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: Español de Venezuela\n"
+"Language: es_VE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.6; wp-6.3.1\n"
+"X-Domain: dokan-pro"
+
+#. Description of the plugin
+msgid ""
+"An e-commerce marketplace plugin for WordPress. Powered by WooCommerce and "
+"weDevs."
+msgstr ""
+
+#. Name of the plugin
+msgid "Dokan Pro"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://dokan.co/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://dokan.co/wordpress/"
+msgstr ""
+
+#: modules/single-product-multiple-vendor/REST/SpmvProductController.php:282
+msgid "Successfully added product to your store"
+msgstr ""
+
+#. Author of the plugin
+msgid "weDevs"
+msgstr ""

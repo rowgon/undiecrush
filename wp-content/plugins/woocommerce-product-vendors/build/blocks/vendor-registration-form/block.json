@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "woocommerce-product-vendors/vendor-registration-form",
+  "version": "0.1.0",
+  "title": "Vendor Registration Form",
+  "category": "widgets",
+  "icon": "forms",
+  "description": "Vendor Registration Form block.",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "woocommerce-product-vendors",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

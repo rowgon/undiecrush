@@ -1,0 +1,1227 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Age Gate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-14 10:42+0000\n"
+"PO-Revision-Date: 2023-11-14 10:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: Español de Venezuela\n"
+"Language: es_VE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.6; wp-6.4.1\n"
+"X-Domain: age-gate"
+
+#. Description of the plugin
+msgid "A customisable age gate to block content from younger people"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:38
+msgid "A hook has stopped working"
+msgstr ""
+
+#: src/Admin/Controller/AccessController.php:21
+msgid "Access"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:60
+msgid ""
+"Add Age Gate early in the load process. This may give a visual speed "
+"improvement but harm pagespeed scores (blocking)"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:169
+msgid "Add viewport meta to Age Gate page"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:150
+msgid "Additional content"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:117
+msgid "Additional tags"
+msgstr ""
+
+#: src/Admin/Controller/AdvancedController.php:18
+msgid "Advanced"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:176 src/Admin/Settings/Content.php:177
+#: src/Admin/Settings/Content.php:236 src/Admin/Settings/Content.php:237
+msgid "Age"
+msgstr ""
+
+#. Name of the plugin
+#: src/Admin/User/Toolbar.php:62 src/Admin/Post/Edit.php:113
+#: src/Resources/views/admin/partials/global/admin-toolbar.php:3
+msgid "Age Gate"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:16
+msgid ""
+"Age Gate 3 relies on the WordPress REST API when in JavaScript mode. It is "
+"common (and sensible) to lock down some of the API features. You you are "
+"doing so, make sure the Age Gate endpoints are allowed."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:32
+msgid ""
+"Age Gate 3 takes a BEM approach to CSS selectors. If you upgraded from v2.x "
+"to 3, it should automatically be using the V2 selector, but check the CSS "
+"Style setting in the Advanced tab."
+msgstr ""
+
+#: src/Update/Activate.php:187
+msgid ""
+"Age Gate could not find a suitable administrator role. Admin permissions had "
+"been added to you only. Please visit the Age Gate access settings to set "
+"permissions for other users and roles."
+msgstr ""
+
+#: age-gate.php:29
+msgid ""
+"Age Gate could not load its dependencies. Please check your installation."
+msgstr ""
+
+#: src/Admin/Admin.php:95
+msgid ""
+"Age Gate is currently disabled in the Tools section and will not show for "
+"any users"
+msgstr ""
+
+#: src/Admin/Admin.php:54
+msgid ""
+"Age Gate requires a minimum PHP version of 7.4 which your system does not "
+"have. You may experience some issues."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:24
+msgid ""
+"Age Gate utilises a \"focus trap\" to prevent users being able to access "
+"other parts of the site. This can also gobble up cookie banners and make "
+"them unresponsive. You can disable the focus trap in the advanced settings, "
+"or add elements to it using the age_gate/trap_focus/elements filter"
+msgstr ""
+
+#: src/Admin/Post/ListTable.php:95
+msgid "Age Gate: Restrict"
+msgstr ""
+
+#: src/Admin/Post/ListTable.php:96
+msgid "Age Gate: Unrestrict"
+msgstr ""
+
+#: src/Resources/views/admin/term/edit-wrapper.php:2
+msgid "Age Restriction"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:188
+msgid "Age Verification"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:31
+msgid "All content"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:182
+msgid "An error occurred, please try again"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:34
+msgid "Ancestor inheritance"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:153
+msgid "Anonymous Age Gate"
+msgstr ""
+
+#: src/Admin/Controller/AppearanceController.php:19
+msgid "Appearance"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:88
+msgid "Archives"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:56
+msgid "Are you over {age} years of age?"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:42
+msgid "Aria label"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:93
+msgid "Author archives"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:155
+msgid "Auto check remember me"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:173
+msgid "Auto tab inputs"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:19
+msgid "Background colour"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:24
+msgid "Background colour opacity"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:43
+msgid "Background image"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:77
+msgid "Background image opacity"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:48
+msgid "Background position"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:12
+msgid "Below are the core settings to Age Gate your content."
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:93
+msgid "Block certain actions from a user."
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:34
+msgid "Blur other elements by"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:44
+msgid ""
+"Both the logs and regions extensions have had updates to run with v3. Ensure "
+"both are up to date. In some rare instance you may need to download the "
+"latest version again and upload it to your site."
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:66
+msgid "Bottom"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:79
+msgid "Button order"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:32
+msgid ""
+"By default, if Age Gate fails to get a response from the REST API it will "
+"then attempt an admin_ajax request"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:166 src/Admin/Settings/Content.php:167
+#: src/Admin/Settings/Content.php:226 src/Admin/Settings/Content.php:227
+msgid "Bypass"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:11
+msgid "Caching / Performance"
+msgstr ""
+
+#: src/Resources/views/admin/partials/global/media-picker.php:8
+msgid "Cancel"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:57 src/Admin/Settings/Appearance.php:67
+msgid "Center"
+msgstr ""
+
+#: src/Resources/views/admin/post/meta-box.php:20
+msgid "Change"
+msgstr ""
+
+#: src/Resources/views/admin/access.php:13
+msgid "Change age for indiviual content"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:178
+msgid "Change the page title"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:77
+msgid "Clear all meta data."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:59
+msgid "Clear any caches."
+msgstr ""
+
+#: src/Admin/Controller/ContentController.php:25
+msgid "Content"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:56
+msgid ""
+"Content can inherit restrictions from its taxonomy. Note the most "
+"restrictive will be selected. See docs for more information"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:158
+msgid "Cookie name"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:185
+msgid "CSS style"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:137
+msgid "Custom bots"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:170
+msgid "Custom CSS"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:172
+msgid "Custom CSS can now be found/added in the customiser"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:186
+msgid "Custom page title"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:12
+msgid "Customise the various messages Age Gate uses"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:66
+msgid "Date format"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:83
+msgid "Day"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:199
+msgid "Day archives"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:78
+msgid "Day label"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:105
+msgid "Day placeholder"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:142
+msgid "Days"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:110
+msgid "DD"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:24
+msgid "Default age"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:34
+msgid "Developer endpoint"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:28
+msgid "Development warning"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:16
+msgid "Disable Age Gate"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:29
+msgid "Disable AJAX fallback"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:18
+msgid "Disable all Age Gates to users"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:109
+msgid "Disable right click and F12"
+msgstr ""
+
+#: src/Resources/views/admin/post/type/all.php:4
+msgid "Do not age restrict this content"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:16
+msgid "Do not show Age Gate publish actions for the following post types"
+msgstr ""
+
+#: src/Admin/Admin.php:134 src/Admin/Settings/Restriction.php:105
+#: src/Resources/views/admin/default.php:49
+msgid "Documentation"
+msgstr ""
+
+#: src/Admin/Admin.php:118
+msgid "Donate"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:50
+msgid "Dropdown fields"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:36
+msgid "Enable a developer API endpoint containing Age Gate information"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:69
+msgid "Enable certain hooks in JavaScript"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:120
+msgid "Enable RTA tag"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:198
+msgid "Enable simplebar"
+msgstr ""
+
+#: src/Admin/Update.php:85 src/Admin/Update.php:92
+msgid "Enable update"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:201
+msgid "Enables a stylable scrollbar if Age Gate overflows"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:72
+#: src/Resources/views/admin/tools.php:83
+msgid "Enter your password"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:76
+msgid "Errors"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:54
+msgid "Everything is broken!"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:13
+msgid "Export"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:158
+msgid "Fade"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:168
+msgid "Failed error"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:100
+#, php-format
+msgid ""
+"Focus trapping can help accessibility, however may conflict with other "
+"popups like cookie banners. %s"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:87
+msgid "Foreground colour"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:92
+msgid "Foreground colour opacity"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:177
+msgid "Generic error"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:15
+msgid "Headline"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:94
+msgid "High to low"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:66
+msgid "Hooks"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:143
+msgid "Hours"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:89
+msgid "How Age Gate should handle certain archive pages"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:94
+msgid "How Age Gate should handle certain author pages"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:77
+msgid "How Age Gate should handle certain error pages"
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://agegate.io/"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:22
+msgid "I can't click my cookie banner or other elements"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:9
+msgid "I can't get past the Age Gate / The Age Gate only worked once"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:14
+msgid "I'm seeing an API error"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:68
+msgid ""
+"If all else fails, you can always roll back to a previous version of the "
+"plugin."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:52
+msgid ""
+"If something else isn't working, check the documentations first as there may "
+"be a solution. If not, raise a support question."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:56
+msgid ""
+"If something feels very off after a update there are a few steps you can "
+"take;"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:13
+msgid ""
+"If you have a caching solution, it is best to use a JavaScript triggered "
+"version of the age gate as this won't be adversely affected by the cache. If "
+"you don't have caching, the standard method is recommended."
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:164
+msgid "Ignore logged in"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:44
+msgid "Import"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:9
+msgid "Import/Export"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:57
+msgid "In header"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:155
+msgid "In JavaScript transition Age Gate out"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:78
+msgid "Include loader as image tag (default inline SVG)"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:59
+msgid "Inherit taxonomies"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:49
+msgid "Input fields"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:92
+msgid "Interactions"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:186
+msgid "Invalid date"
+msgstr ""
+
+#: src/Admin/Controller/AccessController.php:47
+msgid "Invalid form data"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:159
+msgid "Invalid inputs"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:60
+msgid "It could be something didn't update as expected."
+msgstr ""
+
+#: src/Admin/Update.php:84
+msgid ""
+"It is advised that you do not update on a live website and test locally or "
+"on a staging site first."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:48
+msgid "It's being worked on, but there are only so many hours in a day."
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:107
+msgid "Layout"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:55
+msgid "Left"
+msgstr ""
+
+#: src/Resources/views/public/partials/decoration/loader.php:4
+msgid "Loading"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:75
+msgid "Loading image"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:38
+msgid "Local storage"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:14
+msgid "Logo"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:87
+msgid "Logo and/or background images are preloaded"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:93
+msgid "Low to high"
+msgstr ""
+
+#: src/Resources/views/admin/access.php:21
+#, php-format
+msgid "Manage %s settings"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:40
+msgid ""
+"Many hooks have been changed and/or removed in v3. Some critical ones have "
+"been back ported to still work with v3. Check the documentation for a full "
+"list of available hooks."
+msgstr ""
+
+#: src/Admin/Controller/MessageController.php:24
+msgid "Messages"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:16
+msgid "Method"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:144
+msgid "Minutes"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:119
+msgid "MM"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:92
+msgid "Month"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:198
+msgid "Month archives"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:87
+msgid "Month label"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:114
+msgid "Month placeholder"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:62
+msgid "More hardcore methods"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:48
+msgid "Munge options"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:34
+msgid "My custom content has changed"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:26
+msgid "My custom CSS is missing"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:30
+msgid "My custom CSS isn't working"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:18
+msgid "My term or taxonomy isn't inheriting"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:74
+msgid "No"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:69
+msgid "No button text"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:20
+msgid "No caching (JavaScript)"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:141
+msgid "No cookies message"
+msgstr ""
+
+#: src/Admin/Controller/ContentController.php:23
+msgid "No terms"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:76
+msgid "No then Yes"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:58
+msgid "Non-destructive methods"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:101
+msgid "Not available on all devices"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:42
+msgid "Occasionally send settings information to the developers"
+msgstr ""
+
+#. Author of the plugin
+msgid "Phil Baker"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:15
+msgid "Post Types"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:196
+msgid "Posts archive"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:84
+msgid "Preload images"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:170
+msgid "Rechallenge"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:176
+msgid "Redirect failures "
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:42
+msgid "Regions / Logs aren no longer working"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:63
+msgid "Reinstall the plugin code."
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:118
+msgid "Remember"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:122
+#: src/Admin/Settings/Restriction.php:136
+msgid "Remember length"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:38
+msgid "Remember me"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:33
+msgid "Remember me text"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:147
+msgid "Remember time"
+msgstr ""
+
+#: src/Resources/views/admin/partials/fields/image.php:12
+msgid "Remove"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:78
+msgid ""
+"Remove any custom ages, bypass and restrict settings. This cannot be undone."
+msgstr ""
+
+#: src/Resources/views/admin/partials/fields/message.php:8
+msgid "Remove legacy styles"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:112
+msgid ""
+"Removes users ability to open context menu or dev tools with F12. Other "
+"routes may stil be available for developers"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:73
+#: src/Resources/views/admin/tools.php:84
+msgid "Reset"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:62
+msgid "Reset Age Gate"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:64
+msgid "Reset the plugin."
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:66
+msgid "Restore Age Gate to default settings."
+msgstr ""
+
+#: src/Admin/Settings/Content.php:171 src/Admin/Settings/Content.php:172
+#: src/Admin/Settings/Content.php:231 src/Admin/Settings/Content.php:232
+#: src/Admin/Settings/Restriction.php:35
+msgid "Restrict"
+msgstr ""
+
+#: src/Resources/views/admin/post/type/selected.php:4
+msgid "Restrict this content"
+msgstr ""
+
+#: src/Resources/views/admin/access.php:10
+msgid "Restrict/Bypass indiviual content"
+msgstr ""
+
+#: src/Resources/views/admin/post/meta-box.php:14
+#: src/Resources/views/admin/post/meta-box.php:17
+msgid "Restricted"
+msgstr ""
+
+#: src/Resources/views/admin/post/list-column.php:4
+#: src/Resources/views/admin/post/list-column.php:7
+msgid "Restricted to"
+msgstr ""
+
+#: src/Resources/views/admin/post/meta-box.php:17
+#, php-format
+msgid "Restricted to %s"
+msgstr ""
+
+#: src/Resources/views/admin/post/meta-box.php:14
+msgid "Restricted to {0}"
+msgstr ""
+
+#: src/Admin/Controller/RestrictionController.php:39
+msgid "Restrictions"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:56
+msgid "Right"
+msgstr ""
+
+#: src/Resources/views/admin/layouts/default.php:26
+msgid "Save settings"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:103
+msgid "See documentation"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:69
+msgid "See previous versions"
+msgstr ""
+
+#: src/Resources/views/admin/partials/global/media-picker.php:9
+msgid "Select"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:19
+msgid "Select all"
+msgstr ""
+
+#: src/Resources/views/admin/partials/fields/image.php:13
+msgid "Select image"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:40
+msgid "Send feedback"
+msgstr ""
+
+#: src/Resources/views/admin/post/meta/age.php:2
+msgid "Set"
+msgstr ""
+
+#: src/Resources/views/admin/post/meta/age.php:2
+msgid "Set age to: "
+msgstr ""
+
+#: src/Admin/Admin.php:117
+msgid "Settings"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:51
+msgid ""
+"Settings in JavaScript mode are not outputted as a script tag, useful for "
+"some performance plugins like Lightspeed"
+msgstr ""
+
+#: src/Admin/Admin.php:66
+msgid "Settings saved"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:35
+msgid "Should hierarchical post types cascade restrictions"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:130
+msgid "Show in front end toolbar"
+msgstr ""
+
+#: src/Admin/Settings/Tools.php:30
+msgid "Show warnings if using development version"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:160
+msgid "Slide down"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:161
+msgid "Slide left"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:162
+msgid "Slide right"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:159
+msgid "Slide up"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:42
+msgid ""
+"Some cookie banners may disable or unset cookies, use local storage as an "
+"alternative to cookies"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:50
+msgid "Something else is not working"
+msgstr ""
+
+#: src/Admin/Admin.php:70
+msgid "Something went wrong"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:19
+msgid "Standard (PHP)"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:100
+msgid "Stepped Inputs"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:166
+msgid "Styling"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:24
+msgid "Sub headline"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:137
+msgid "Submit"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:132
+msgid "Submit button text"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:69
+msgid "Taxonomies"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:54
+msgid "Taxonomy Inheritance"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:102
+msgid "Text colour"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:28
+msgid ""
+"The custom CSS editor is no longer permitted. On updating to version 3.x any "
+"custom style would have been moved to the default custom css editor in the "
+"Wordpress customiser. It was also moved to a custom option so you should be "
+"able to view it still in the Advanced settings - but note that content will "
+"not update."
+msgstr ""
+
+#: src/Admin/Admin.php:91
+msgid ""
+"The developer endpoint is enabled. You should disable this unless you have "
+"an open support topic"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:11
+msgid ""
+"The most likely cause for this is caching on your site either via a plugin "
+"or your hosting provider. If the Age Gate appears stuck try using the "
+"JavaScript mode in the advanced tab and clear any caches."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:20
+msgid ""
+"The term you want to inherit must be resticted or bypassed depending on your "
+"mode. These settings are within the term edit screens. Age Gate will then "
+"use the highest restriction. For example, content has one unrestricted and "
+"one restricted term, the content will be restricted. Also, if you have Multi-"
+"ages enabled, the highest age will be used and an ae set on the content (ie, "
+"not the default age) always wins."
+msgstr ""
+
+#: src/Admin/Update.php:85
+msgid ""
+"The update link has been disabled just to be safe, but if you are sure you "
+"want to update you can enable the update link here: "
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:36
+msgid ""
+"The WYSIWYG editor has been removed in version 3 as it was generally "
+"problematic from a development point of view. The editor is now markdown "
+"based and much stricter on what is allowed. Shortcodes are still permitted."
+msgstr ""
+
+#: src/Admin/Settings/Message.php:191
+msgid "The {field} must be a valid date"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:46
+msgid "There's missing documentation"
+msgstr ""
+
+#: src/Resources/views/admin/tools.php:67
+msgid "This cannot be undone, so export your settings first"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:59
+msgid "This has been known to solve a lot of problems."
+msgstr ""
+
+#: src/Admin/Update.php:83
+msgid ""
+"This is a milestone release of Age Gate that could have unexpected results "
+"on your site."
+msgstr ""
+
+#: src/Admin/Update.php:76
+msgid ""
+"This is a minor release of Age Gate that could have unexpected results on "
+"your site."
+msgstr ""
+
+#: src/Admin/Update.php:71
+msgid ""
+"This is a patch release of Age Gate, updating directly should not cause any "
+"issues, however do ensure you have backed up any previous version settings."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:64
+msgid ""
+"This will remove any settings and restore the default ones so use with "
+"caution."
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:127
+msgid "Toolbar"
+msgstr ""
+
+#: src/Admin/Controller/ToolsController.php:40
+msgid "Tools"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:65
+msgid "Top"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:152
+msgid "Transition"
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:96
+msgid "Trap focus"
+msgstr ""
+
+#: src/Admin/Controller/TroubleShootingController.php:15
+msgid "Troubleshooting"
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:60
+msgid "Try resaving the settings."
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:142
+msgid "UA Strings"
+msgstr ""
+
+#: src/Resources/views/admin/post/list-column.php:9
+#: src/Resources/views/admin/post/list-column.php:12
+#: src/Resources/views/admin/post/meta-box.php:14
+#: src/Resources/views/admin/post/meta-box.php:17
+msgid "Unrestricted"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:110
+msgid "Use plugin style on the front end"
+msgstr ""
+
+#: src/Resources/views/admin/access.php:18
+#, php-format
+msgid "User can %s all settings"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:53
+msgid "Validate age using"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:43
+msgid "Varied ages"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:166
+msgid "Viewport meta tag"
+msgstr ""
+
+#: src/Admin/Update.php:76 src/Admin/Update.php:83 src/Admin/Update.php:92
+msgid "WARNING"
+msgstr ""
+
+#: src/Admin/Admin.php:140
+msgid "What&rsquo;s new?"
+msgstr ""
+
+#: src/Admin/Update.php:77
+msgid ""
+"While it should be safe to update, it is advised that you test locally or on "
+"a staging site first."
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:52
+msgid "X axis"
+msgstr ""
+
+#: src/Admin/Settings/Appearance.php:62
+msgid "Y axis"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:101
+msgid "Year"
+msgstr ""
+
+#: src/Admin/Settings/Content.php:197
+msgid "Year archives"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:96
+msgid "Year label"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:88
+msgid "Year order"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:123
+msgid "Year placeholder"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:65
+msgid "Yes"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:60
+msgid "Yes button text"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:77
+msgid "Yes then No"
+msgstr ""
+
+#: src/Admin/Settings/Restriction.php:51
+msgid "Yes/No buttons"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:51
+msgid "Yes/No sub question"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:173
+msgid "You are not old enough to view this content"
+msgstr ""
+
+#: src/Admin/Update.php:92
+msgid ""
+"You are updating from a development version of Age Gate, some features, "
+"settings or functionality may no longer be available. Check the release "
+"notes and proceed with caution"
+msgstr ""
+
+#. %1$s: Sub version  number. %2$s: Full version number.
+#: src/Admin/Admin.php:85
+#, php-format
+msgid ""
+"You are using the %1$s version of Age Gate %2$s. This may not be suitable "
+"for production websites."
+msgstr ""
+
+#: src/Admin/Settings/Advanced.php:167
+msgid "You can add custom CSS for the Age Gate in customizer."
+msgstr ""
+
+#: src/Resources/views/admin/troubleshooting.php:63
+msgid ""
+"You can download the plugin and reupload to you site via either the "
+"Wordpress admin or SFTP."
+msgstr ""
+
+#: src/Admin/Settings/Message.php:146
+msgid ""
+"Your browser does not support cookies, you may experience problems entering "
+"this site"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:164
+msgid "Your input was invalid"
+msgstr ""
+
+#: src/Resources/views/admin/partials/fields/message.php:8
+msgid "Your previous styles are below if anything is missing."
+msgstr ""
+
+#: src/Admin/Admin.php:108
+#, php-format
+msgid ""
+"Your version of Age Gate User Registration (%s) is not compatible with Age "
+"Gate %s. Please download a supported version from our website"
+msgstr ""
+
+#: src/Admin/Settings/Message.php:128
+msgid "YYYY"
+msgstr ""

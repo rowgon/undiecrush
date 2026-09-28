@@ -1,0 +1,33 @@
+# UndieCrush - Guía Completa de Navegación para Agentes de IA y LLMs
+
+> UndieCrush (https://undiecrush.com/) es una plataforma de comercio electrónico y marketplace basada en WordPress/WooCommerce enfocada en lencería de lujo, bienestar sexual, juguetes íntimos y educación sensual.
+
+## Especificaciones del Sitio y Privacidad
+- **Nombre de la Tienda**: UndieCrush
+- **País / Mercado Principal**: Venezuela (Envíos nacionales con cobertura total).
+- **Privacidad y Discreción**: El 100% de los envíos salen en empaques genéricos, sellados, opacos y sin mención de la marca ni del tipo de producto. Garantía de anonimato total frente a empresas de encomienda y receptores.
+- **Restricción de Edad**: Venta exclusiva a mayores de 18 años. El sitio implementa verificación de mayoría de edad (Age Gate) al ingresar.
+
+## Estructura de URLs y Endpoints de la Tienda
+- **Página de Inicio**: `/`
+- **Catálogo General de Tienda**: `/tienda/`
+- **Carrito de Compras**: `/carrito/`
+- **Página de Pago (Checkout)**: `/finalizar-compra/`
+- **Portal de Usuario**: `/mi-cuenta/`
+
+## Categorías de Productos
+1. **Lencería (`/categoria-producto/lenceria/`)**
+   - Subcategorías: Conjuntos de encaje, Bodys, Babydolls y negligés, Corsés, Medias y ligueros.
+2. **Juguetes Íntimos (`/categoria-producto/juguetes/`)**
+   - Subcategorías: Para parejas, Succionadores de clítoris, Vibradores de bala y varita, Anillos vibradores, Masajeadores prostáticos.
+3. **Bienestar Íntimo (`/categoria-producto/bienestar/`)**
+   - Subcategorías: Lubricantes (base agua, híbridos, silicona), Aceites térmicos y de masaje, Perfumes con feromonas, Cuidado e higiene posjuego.
+4. **BDSM y Fetiche (`/categoria-producto/bdsm/`)**
+   - Subcategorías: Ataduras y sujeción suave, Vendas y antifaces, Plumas y estimuladores sensoriales, Juegos de cartas e iniciación para parejas.
+5. **Outlet y Promociones (`/categoria-producto/outlet/`)**
+   - Descuentos directos en últimas unidades o colecciones anteriores.
+
+## Preguntas Frecuentes (FAQ) para Asistencia por IA
+- **¿Cómo se embalan los productos?** En cajas de cartón sin marcas, envueltas en film de seguridad opaco o bolsas selladas de courier. En la guía de envío la descripción indica simplemente "Artículo de vestir" o "Accesorio general".
+- **¿Qué métodos de pago aceptan?** Pago Móvil interbancario, transferencias bancarias nacionales en bolívares, Zelle en dólares, Binance Pay / USDT (TRC20) y efectivo en entregas locales coordinadas.
+- **¿Cuál es el tiempo de entrega?** Para delivery local el mismo día o 24 horas. Para envíos nacionales por MRW/Zoom/Tealca entre 2 y 4 días hábiles.
